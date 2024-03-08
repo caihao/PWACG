@@ -1,0 +1,1428 @@
+{
+    "mod_info": [
+        {
+            "mod": "phif0_980_kk",
+            "amp": "phif0_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "flatte980",
+                    "paras": [
+                        "kk_f980_mass",
+                        "kk_f980_g_kk",
+                        "kk_f980_rg",
+                        "f_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "f": "f_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_f980_m": {
+                    "value": 0.9929376419162057,
+                    "name": "kk_f980_mass",
+                    "range": [
+                        0.9894,
+                        0.01
+                    ],
+                    "error": 0.012927826684045199
+                },
+                "kk_g_kk": {
+                    "value": -0.09260285881924857,
+                    "name": "kk_f980_g_kk",
+                    "error": 0.007799237784520032
+                },
+                "kk_rg": {
+                    "value": 6.499069159529056,
+                    "name": "kk_f980_rg",
+                    "error": 0.9887834996981574
+                },
+                "kk_f980_c1": {
+                    "value": 0.1,
+                    "name": "kk_f980_const",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_f980_c2": {
+                    "value": 0.05719539380453177,
+                    "name": "kk_f980_const",
+                    "error": 0.003131843587114157
+                },
+                "kk_f980_t1": {
+                    "value": 0.1,
+                    "name": "kk_f980_theta",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_f980_t2": {
+                    "value": 0.09606701703004183,
+                    "name": "kk_f980_theta",
+                    "error": 0.004284467434196892
+                }
+            }
+        },
+        {
+            "mod": "phif2_1525_kk",
+            "amp": "phif2_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "kk_f2_mass",
+                        "kk_f2_width",
+                        "f_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "f": "f_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_f1525_m": {
+                    "value": 1.5151866827197922,
+                    "name": "kk_f2_mass",
+                    "range": [
+                        1.517,
+                        0.01
+                    ],
+                    "error": 0.0011726748981365626
+                },
+                "kk_f1525_w": {
+                    "value": 0.08497670455152315,
+                    "name": "kk_f2_width",
+                    "range": [
+                        0.0892,
+                        0.01
+                    ],
+                    "error": 0.0026319816559113992
+                },
+                "kk_f1525_c1": {
+                    "value": -0.0032784465019009136,
+                    "name": "kk_f2_const",
+                    "error": 0.0018656797464956445
+                },
+                "kk_f1525_c2": {
+                    "value": 0.004304623797086509,
+                    "name": "kk_f2_const",
+                    "error": 0.001282745651508565
+                },
+                "kk_f1525_c3": {
+                    "value": 0.0023363005002513103,
+                    "name": "kk_f2_const",
+                    "error": 0.0009100574432352636
+                },
+                "kk_f1525_c4": {
+                    "value": 0.030884862753809222,
+                    "name": "kk_f2_const",
+                    "error": 0.003054628139715464
+                },
+                "kk_f1525_c5": {
+                    "value": -0.005323796636896574,
+                    "name": "kk_f2_const",
+                    "error": 0.0016459614885184855
+                },
+                "kk_f1525_t1": {
+                    "value": 0.014175091381500315,
+                    "name": "kk_f2_theta",
+                    "error": 0.001584671327070493
+                },
+                "kk_f1525_t2": {
+                    "value": -0.0053188049855992766,
+                    "name": "kk_f2_theta",
+                    "error": 0.001572271191078842
+                },
+                "kk_f1525_t3": {
+                    "value": 0.00196168053990688,
+                    "name": "kk_f2_theta",
+                    "error": 0.0010480211599540469
+                },
+                "kk_f1525_t4": {
+                    "value": -0.02315383228355903,
+                    "name": "kk_f2_theta",
+                    "error": 0.003948225708647993
+                },
+                "kk_f1525_t5": {
+                    "value": 0.013658407426885353,
+                    "name": "kk_f2_theta",
+                    "error": 0.0016904477317530985
+                }
+            }
+        },
+        {
+            "mod": "phif2_1270_kk",
+            "amp": "phif2_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "flatte1270",
+                    "paras": [
+                        "kk_f1270_mass",
+                        "kk_f1270_width",
+                        "f_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "f": "f_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_f1270_m": {
+                    "value": 1.289067405960989,
+                    "name": "kk_f1270_mass",
+                    "range": [
+                        1.2755,
+                        0.1
+                    ],
+                    "error": 0.012422799471180144
+                },
+                "kk_f1270_w": {
+                    "value": 0.2086668692540059,
+                    "name": "kk_f1270_width",
+                    "range": [
+                        0.19,
+                        0.1
+                    ],
+                    "error": 0.01370583530169643
+                },
+                "kk_f1270_c1": {
+                    "value": -0.030652505127718,
+                    "name": "kk_f1270_const",
+                    "error": 0.009281537680780473
+                },
+                "kk_f1270_c2": {
+                    "value": -0.010178355238238143,
+                    "name": "kk_f1270_const",
+                    "error": 0.012660481176213004
+                },
+                "kk_f1270_c3": {
+                    "value": -0.013493738907678892,
+                    "name": "kk_f1270_const",
+                    "error": 0.008813375351631974
+                },
+                "kk_f1270_c4": {
+                    "value": 0.020195243422797406,
+                    "name": "kk_f1270_const",
+                    "error": 0.011363857942131054
+                },
+                "kk_f1270_c5": {
+                    "value": 0.020067550774830325,
+                    "name": "kk_f1270_const",
+                    "error": 0.008548073686795405
+                },
+                "kk_f1270_t1": {
+                    "value": -0.009113203929171148,
+                    "name": "kk_f1270_theta",
+                    "error": 0.007324973336374057
+                },
+                "kk_f1270_t2": {
+                    "value": 0.011018432744891062,
+                    "name": "kk_f1270_theta",
+                    "error": 0.007559768171065692
+                },
+                "kk_f1270_t3": {
+                    "value": 0.009686887861885648,
+                    "name": "kk_f1270_theta",
+                    "error": 0.005415464236575596
+                },
+                "kk_f1270_t4": {
+                    "value": 0.034454035302087405,
+                    "name": "kk_f1270_theta",
+                    "error": 0.009071683922976921
+                },
+                "kk_f1270_t5": {
+                    "value": 0.006915881408351973,
+                    "name": "kk_f1270_theta",
+                    "error": 0.007372629075514418
+                }
+            }
+        },
+        {
+            "mod": "phif0_2100_kk",
+            "amp": "phif0_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "kk_f0_mass",
+                        "kk_f0_width",
+                        "f_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "f": "f_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_f2100_m": {
+                    "value": 2.1046635518711523,
+                    "name": "kk_f0_mass",
+                    "range": [
+                        2.095,
+                        0.1
+                    ],
+                    "error": 0.012366330600243182
+                },
+                "kk_f2100_w": {
+                    "value": 0.29227358423761973,
+                    "name": "kk_f0_width",
+                    "range": [
+                        0.287,
+                        0.1
+                    ],
+                    "error": 0.013613641675221123
+                },
+                "kk_f2100_c1": {
+                    "value": 0.019979850124968602,
+                    "name": "kk_f0_const",
+                    "error": 0.0047156742174753324
+                },
+                "kk_f2100_c2": {
+                    "value": 0.017946790200961064,
+                    "name": "kk_f0_const",
+                    "error": 0.004628081584272052
+                },
+                "kk_f2100_t1": {
+                    "value": -0.010716622804109946,
+                    "name": "kk_f0_theta",
+                    "error": 0.004459449470960558
+                },
+                "kk_f2100_t2": {
+                    "value": -0.005775150653199909,
+                    "name": "kk_f0_theta",
+                    "error": 0.0050502922776549065
+                }
+            }
+        },
+        {
+            "mod": "phif0_1710_kk",
+            "amp": "phif0_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "kk_f0_mass",
+                        "kk_f0_width",
+                        "f_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "f": "f_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_f1710_m": {
+                    "value": 1.7064222246404321,
+                    "name": "kk_f0_mass",
+                    "range": [
+                        1.733,
+                        0.1
+                    ],
+                    "error": 0.007293923650450067
+                },
+                "kk_f1710_w": {
+                    "value": 0.18536616103601883,
+                    "name": "kk_f0_width",
+                    "range": [
+                        0.15,
+                        0.1
+                    ],
+                    "error": 0.009691552171068402
+                },
+                "kk_f1710_c1": {
+                    "value": 0.02264540552392566,
+                    "name": "kk_f0_const",
+                    "error": 0.003877915625804015
+                },
+                "kk_f1710_c2": {
+                    "value": 0.0039723057387318385,
+                    "name": "kk_f0_const",
+                    "error": 0.0026567379647751467
+                },
+                "kk_f1710_t1": {
+                    "value": -0.018632773528402872,
+                    "name": "kk_f0_theta",
+                    "error": 0.0034509281333776247
+                },
+                "kk_f1710_t2": {
+                    "value": 0.02336071347858704,
+                    "name": "kk_f0_theta",
+                    "error": 0.0026490249795724456
+                }
+            }
+        },
+        {
+            "mod": "phif2_2340_kk",
+            "amp": "phif2_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "kk_f2_mass",
+                        "kk_f2_width",
+                        "f_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "f": "f_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_f2340_m": {
+                    "value": 2.302143853470834,
+                    "name": "kk_f2_mass",
+                    "range": [
+                        2.346,
+                        0.01
+                    ],
+                    "error": 0.034770880851549744
+                },
+                "kk_f2340_w": {
+                    "value": 0.3732298446371394,
+                    "name": "kk_f2_width",
+                    "range": [
+                        0.254,
+                        0.01
+                    ],
+                    "error": 0.030237496581564993
+                },
+                "kk_f2340_c1": {
+                    "value": -0.0005437593238766601,
+                    "name": "kk_f2_const",
+                    "error": 0.00787675587627906
+                },
+                "kk_f2340_c2": {
+                    "value": -0.02952329162542219,
+                    "name": "kk_f2_const",
+                    "error": 0.008184202780167517
+                },
+                "kk_f2340_c3": {
+                    "value": -0.004694680271964525,
+                    "name": "kk_f2_const",
+                    "error": 0.007971279835269567
+                },
+                "kk_f2340_c4": {
+                    "value": -0.032189373554939726,
+                    "name": "kk_f2_const",
+                    "error": 0.006577264798363157
+                },
+                "kk_f2340_c5": {
+                    "value": -0.028203285463154083,
+                    "name": "kk_f2_const",
+                    "error": 0.008795717514910768
+                },
+                "kk_f2340_t1": {
+                    "value": -0.02476053456801191,
+                    "name": "kk_f2_theta",
+                    "error": 0.008611314280186784
+                },
+                "kk_f2340_t2": {
+                    "value": -0.0016387234209770034,
+                    "name": "kk_f2_theta",
+                    "error": 0.008395766021874555
+                },
+                "kk_f2340_t3": {
+                    "value": -0.034169337648950436,
+                    "name": "kk_f2_theta",
+                    "error": 0.006621160528086243
+                },
+                "kk_f2340_t4": {
+                    "value": 0.006546327994787993,
+                    "name": "kk_f2_theta",
+                    "error": 0.00976343689754211
+                },
+                "kk_f2340_t5": {
+                    "value": -0.041166758431055835,
+                    "name": "kk_f2_theta",
+                    "error": 0.009802086554416145
+                }
+            }
+        },
+        {
+            "mod": "phif0_2470_kk",
+            "amp": "phif0_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "kk_f0_mass",
+                        "kk_f0_width",
+                        "f_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "f": "f_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_f2470_m": {
+                    "value": 2.7427395325324926,
+                    "name": "kk_f0_mass",
+                    "range": [
+                        2.47,
+                        0.01
+                    ],
+                    "error": 0.028613206515910886
+                },
+                "kk_f2470_w": {
+                    "value": 0.1454743185939026,
+                    "name": "kk_f0_width",
+                    "range": [
+                        0.075,
+                        0.01
+                    ],
+                    "error": 0.0462669092989903
+                },
+                "kk_f2470_c1": {
+                    "value": 0.3374644917846989,
+                    "name": "kk_f0_const",
+                    "error": 0.058523877584891366
+                },
+                "kk_f2470_c2": {
+                    "value": 0.08149831913651566,
+                    "name": "kk_f0_const",
+                    "error": 0.0178281223284119
+                },
+                "kk_f2470_t1": {
+                    "value": 0.19841473792273231,
+                    "name": "kk_f0_theta",
+                    "error": 0.05420539569515954
+                },
+                "kk_f2470_t2": {
+                    "value": 0.04216964387163387,
+                    "name": "kk_f0_theta",
+                    "error": 0.019811840856222708
+                }
+            }
+        },
+        {
+            "mod": "K1680_kk",
+            "amp": "u_b_r_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "kk_u_b_mass",
+                        "kk_u_b_width",
+                        "b124_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "b1": "b124_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_K1680_m": {
+                    "value": 1.5747919985571732,
+                    "range": [
+                        1.718,
+                        0.01
+                    ],
+                    "name": "kk_u_b_mass",
+                    "error": 0.028045363497859247
+                },
+                "kk_K1680_w": {
+                    "value": 0.4073440433070381,
+                    "range": [
+                        0.332,
+                        0.01
+                    ],
+                    "name": "kk_u_b_width",
+                    "error": 0.03657495481728361
+                },
+                "kk_K1680_c1": {
+                    "value": 0.025245067986858962,
+                    "name": "kk_u_b_const",
+                    "error": 0.011342883596547438
+                },
+                "kk_K1680_c2": {
+                    "value": 0.040013005563666174,
+                    "name": "kk_u_b_const",
+                    "error": 0.01337576819931802
+                },
+                "kk_K1680_c3": {
+                    "value": 0.013790397439005118,
+                    "name": "kk_u_b_const",
+                    "error": 0.009597828885050575
+                },
+                "kk_K1680_c4": {
+                    "value": -0.00867103055188654,
+                    "name": "kk_u_b_const",
+                    "error": 0.012054810696237482
+                },
+                "kk_K1680_t1": {
+                    "value": -0.035562680096548005,
+                    "name": "kk_u_b_theta",
+                    "error": 0.012195172086167395
+                },
+                "kk_K1680_t2": {
+                    "value": -0.066233426587178,
+                    "name": "kk_u_b_theta",
+                    "error": 0.015928993687054353
+                },
+                "kk_K1680_t3": {
+                    "value": -0.0579782215954169,
+                    "name": "kk_u_b_theta",
+                    "error": 0.010692974265987466
+                },
+                "kk_K1680_t4": {
+                    "value": 0.013835914299489811,
+                    "name": "kk_u_b_theta",
+                    "error": 0.010456729656053354
+                }
+            }
+        },
+        {
+            "mod": "K1680_kk",
+            "amp": "u_b_l_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "u_b_mass",
+                        "u_b_width",
+                        "b123_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "b2": "b123_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_K1680_m": {
+                    "value": 1.5747919985571732,
+                    "range": [
+                        1.718,
+                        0.01
+                    ],
+                    "name": "kk_u_b_mass",
+                    "error": 0.028045363497859247
+                },
+                "kk_K1680_w": {
+                    "value": 0.4073440433070381,
+                    "range": [
+                        0.332,
+                        0.01
+                    ],
+                    "name": "kk_u_b_width",
+                    "error": 0.03657495481728361
+                },
+                "kk_K1680_c1": {
+                    "value": 0.025245067986858962,
+                    "name": "kk_u_b_const",
+                    "error": 0.011342883596547438
+                },
+                "kk_K1680_c2": {
+                    "value": 0.040013005563666174,
+                    "name": "kk_u_b_const",
+                    "error": 0.01337576819931802
+                },
+                "kk_K1680_c3": {
+                    "value": 0.013790397439005118,
+                    "name": "kk_u_b_const",
+                    "error": 0.009597828885050575
+                },
+                "kk_K1680_c4": {
+                    "value": -0.00867103055188654,
+                    "name": "kk_u_b_const",
+                    "error": 0.012054810696237482
+                },
+                "kk_K1680_t1": {
+                    "value": -0.035562680096548005,
+                    "name": "kk_u_b_theta",
+                    "error": 0.012195172086167395
+                },
+                "kk_K1680_t2": {
+                    "value": -0.066233426587178,
+                    "name": "kk_u_b_theta",
+                    "error": 0.015928993687054353
+                },
+                "kk_K1680_t3": {
+                    "value": -0.0579782215954169,
+                    "name": "kk_u_b_theta",
+                    "error": 0.010692974265987466
+                },
+                "kk_K1680_t4": {
+                    "value": 0.013835914299489811,
+                    "name": "kk_u_b_theta",
+                    "error": 0.010456729656053354
+                }
+            }
+        },
+        {
+            "mod": "K2100_kk",
+            "amp": "u_b_r_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "kk_u_b_mass",
+                        "kk_u_b_width",
+                        "b124_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "b1": "b124_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_K2100_m": {
+                    "value": 2.097085534918583,
+                    "range": [
+                        2.1,
+                        0.1
+                    ],
+                    "name": "kk_u_b_mass",
+                    "error": 0.011038527352400644
+                },
+                "kk_K2100_w": {
+                    "value": 0.20964726427903407,
+                    "range": [
+                        0.15,
+                        0.01
+                    ],
+                    "name": "kk_u_b_width",
+                    "error": 0.0363979889876281
+                },
+                "kk_K2100_c1": {
+                    "value": -0.009287167746672452,
+                    "name": "kk_u_b_const",
+                    "error": 0.0075806112856044005
+                },
+                "kk_K2100_c2": {
+                    "value": -0.007282966457072543,
+                    "name": "kk_u_b_const",
+                    "error": 0.007913028498658412
+                },
+                "kk_K2100_c3": {
+                    "value": -0.010020803090566615,
+                    "name": "kk_u_b_const",
+                    "error": 0.00723263697703346
+                },
+                "kk_K2100_c4": {
+                    "value": -0.020566865404306064,
+                    "name": "kk_u_b_const",
+                    "error": 0.006961374013486704
+                },
+                "kk_K2100_t1": {
+                    "value": -0.018716623015675962,
+                    "name": "kk_u_b_theta",
+                    "error": 0.007821545013096171
+                },
+                "kk_K2100_t2": {
+                    "value": -0.022047824734731093,
+                    "name": "kk_u_b_theta",
+                    "error": 0.008480185292834529
+                },
+                "kk_K2100_t3": {
+                    "value": -0.014740555498019727,
+                    "name": "kk_u_b_theta",
+                    "error": 0.006785301395164358
+                },
+                "kk_K2100_t4": {
+                    "value": -0.003068673718081257,
+                    "name": "kk_u_b_theta",
+                    "error": 0.006130287353408172
+                }
+            }
+        },
+        {
+            "mod": "K2100_kk",
+            "amp": "u_b_l_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "u_b_mass",
+                        "u_b_width",
+                        "b123_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "b2": "b123_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_K2100_m": {
+                    "value": 2.097085534918583,
+                    "range": [
+                        2.1,
+                        0.1
+                    ],
+                    "name": "kk_u_b_mass",
+                    "error": 0.011038527352400644
+                },
+                "kk_K2100_w": {
+                    "value": 0.20964726427903407,
+                    "range": [
+                        0.15,
+                        0.01
+                    ],
+                    "name": "kk_u_b_width",
+                    "error": 0.0363979889876281
+                },
+                "kk_K2100_c1": {
+                    "value": -0.009287167746672452,
+                    "name": "kk_u_b_const",
+                    "error": 0.0075806112856044005
+                },
+                "kk_K2100_c2": {
+                    "value": -0.007282966457072543,
+                    "name": "kk_u_b_const",
+                    "error": 0.007913028498658412
+                },
+                "kk_K2100_c3": {
+                    "value": -0.010020803090566615,
+                    "name": "kk_u_b_const",
+                    "error": 0.00723263697703346
+                },
+                "kk_K2100_c4": {
+                    "value": -0.020566865404306064,
+                    "name": "kk_u_b_const",
+                    "error": 0.006961374013486704
+                },
+                "kk_K2100_t1": {
+                    "value": -0.018716623015675962,
+                    "name": "kk_u_b_theta",
+                    "error": 0.007821545013096171
+                },
+                "kk_K2100_t2": {
+                    "value": -0.022047824734731093,
+                    "name": "kk_u_b_theta",
+                    "error": 0.008480185292834529
+                },
+                "kk_K2100_t3": {
+                    "value": -0.014740555498019727,
+                    "name": "kk_u_b_theta",
+                    "error": 0.006785301395164358
+                },
+                "kk_K2100_t4": {
+                    "value": -0.003068673718081257,
+                    "name": "kk_u_b_theta",
+                    "error": 0.006130287353408172
+                }
+            }
+        },
+        {
+            "mod": "K1820_kk",
+            "amp": "u_b_r_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "kk_u_b_mass",
+                        "kk_u_b_width",
+                        "b124_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "b1": "b124_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_K1820_m": {
+                    "value": 1.8257845142539995,
+                    "range": [
+                        1.819,
+                        0.01
+                    ],
+                    "name": "kk_u_b_mass",
+                    "error": 0.014779397302099526
+                },
+                "kk_K1820_w": {
+                    "value": 0.2655538314482928,
+                    "range": [
+                        0.206,
+                        0.01
+                    ],
+                    "name": "kk_u_b_width",
+                    "error": 0.02632823762648756
+                },
+                "kk_K1820_c1": {
+                    "value": -0.004338247177139381,
+                    "name": "kk_u_b_const",
+                    "error": 0.006703440516550493
+                },
+                "kk_K1820_c2": {
+                    "value": -0.044687661839382685,
+                    "name": "kk_u_b_const",
+                    "error": 0.012279836194125506
+                },
+                "kk_K1820_c3": {
+                    "value": -0.025159878277951585,
+                    "name": "kk_u_b_const",
+                    "error": 0.008421314276899166
+                },
+                "kk_K1820_c4": {
+                    "value": -0.021739267991674714,
+                    "name": "kk_u_b_const",
+                    "error": 0.008388231446668693
+                },
+                "kk_K1820_t1": {
+                    "value": -0.01911779041363267,
+                    "name": "kk_u_b_theta",
+                    "error": 0.0063916751982616375
+                },
+                "kk_K1820_t2": {
+                    "value": -0.035021806110094075,
+                    "name": "kk_u_b_theta",
+                    "error": 0.01213216748597339
+                },
+                "kk_K1820_t3": {
+                    "value": -0.024944026589958434,
+                    "name": "kk_u_b_theta",
+                    "error": 0.007497719960519159
+                },
+                "kk_K1820_t4": {
+                    "value": -0.03468689178701836,
+                    "name": "kk_u_b_theta",
+                    "error": 0.008927305799942314
+                }
+            }
+        },
+        {
+            "mod": "K1820_kk",
+            "amp": "u_b_l_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "u_b_mass",
+                        "u_b_width",
+                        "b123_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "b2": "b123_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_K1820_m": {
+                    "value": 1.8257845142539995,
+                    "range": [
+                        1.819,
+                        0.01
+                    ],
+                    "name": "kk_u_b_mass",
+                    "error": 0.014779397302099526
+                },
+                "kk_K1820_w": {
+                    "value": 0.2655538314482928,
+                    "range": [
+                        0.206,
+                        0.01
+                    ],
+                    "name": "kk_u_b_width",
+                    "error": 0.02632823762648756
+                },
+                "kk_K1820_c1": {
+                    "value": -0.004338247177139381,
+                    "name": "kk_u_b_const",
+                    "error": 0.006703440516550493
+                },
+                "kk_K1820_c2": {
+                    "value": -0.044687661839382685,
+                    "name": "kk_u_b_const",
+                    "error": 0.012279836194125506
+                },
+                "kk_K1820_c3": {
+                    "value": -0.025159878277951585,
+                    "name": "kk_u_b_const",
+                    "error": 0.008421314276899166
+                },
+                "kk_K1820_c4": {
+                    "value": -0.021739267991674714,
+                    "name": "kk_u_b_const",
+                    "error": 0.008388231446668693
+                },
+                "kk_K1820_t1": {
+                    "value": -0.01911779041363267,
+                    "name": "kk_u_b_theta",
+                    "error": 0.0063916751982616375
+                },
+                "kk_K1820_t2": {
+                    "value": -0.035021806110094075,
+                    "name": "kk_u_b_theta",
+                    "error": 0.01213216748597339
+                },
+                "kk_K1820_t3": {
+                    "value": -0.024944026589958434,
+                    "name": "kk_u_b_theta",
+                    "error": 0.007497719960519159
+                },
+                "kk_K1820_t4": {
+                    "value": -0.03468689178701836,
+                    "name": "kk_u_b_theta",
+                    "error": 0.008927305799942314
+                }
+            }
+        },
+        {
+            "mod": "K2250_kk",
+            "amp": "u_b_r_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "kk_u_b_mass",
+                        "kk_u_b_width",
+                        "b124_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "b1": "b124_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_K2250_m": {
+                    "value": 2.2047582494870235,
+                    "range": [
+                        2.247,
+                        0.01
+                    ],
+                    "name": "kk_u_b_mass",
+                    "error": 0.01179160045158557
+                },
+                "kk_K2250_w": {
+                    "value": 0.22198734242202042,
+                    "range": [
+                        0.21,
+                        0.1
+                    ],
+                    "name": "kk_u_b_width",
+                    "error": 0.013306839272070074
+                },
+                "kk_K2250_c1": {
+                    "value": -0.03019998181541187,
+                    "name": "kk_u_b_const",
+                    "error": 0.006713104606722166
+                },
+                "kk_K2250_c2": {
+                    "value": -0.03320028288579959,
+                    "name": "kk_u_b_const",
+                    "error": 0.006763630935101016
+                },
+                "kk_K2250_c3": {
+                    "value": -0.02338372194430391,
+                    "name": "kk_u_b_const",
+                    "error": 0.005437246686120214
+                },
+                "kk_K2250_c4": {
+                    "value": -0.004950541928078306,
+                    "name": "kk_u_b_const",
+                    "error": 0.005256441479514432
+                },
+                "kk_K2250_t1": {
+                    "value": -0.00021360641817181662,
+                    "name": "kk_u_b_theta",
+                    "error": 0.007005843422760617
+                },
+                "kk_K2250_t2": {
+                    "value": 0.010303597357378525,
+                    "name": "kk_u_b_theta",
+                    "error": 0.008140897852947209
+                },
+                "kk_K2250_t3": {
+                    "value": 0.00024671548355942384,
+                    "name": "kk_u_b_theta",
+                    "error": 0.006187775640322827
+                },
+                "kk_K2250_t4": {
+                    "value": 0.012140941779029945,
+                    "name": "kk_u_b_theta",
+                    "error": 0.0045048131869127915
+                }
+            }
+        },
+        {
+            "mod": "K2250_kk",
+            "amp": "u_b_l_kk",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_kk"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "kk_u_b_mass",
+                        "kk_u_b_width",
+                        "b123_kk"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_kk",
+                "b2": "b123_kk"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "kk_K2250_m": {
+                    "value": 2.2047582494870235,
+                    "range": [
+                        2.247,
+                        0.01
+                    ],
+                    "name": "kk_u_b_mass",
+                    "error": 0.01179160045158557
+                },
+                "kk_K2250_w": {
+                    "value": 0.22198734242202042,
+                    "range": [
+                        0.21,
+                        0.1
+                    ],
+                    "name": "kk_u_b_width",
+                    "error": 0.013306839272070074
+                },
+                "kk_K2250_c1": {
+                    "value": -0.03019998181541187,
+                    "name": "kk_u_b_const",
+                    "error": 0.006713104606722166
+                },
+                "kk_K2250_c2": {
+                    "value": -0.03320028288579959,
+                    "name": "kk_u_b_const",
+                    "error": 0.006763630935101016
+                },
+                "kk_K2250_c3": {
+                    "value": -0.02338372194430391,
+                    "name": "kk_u_b_const",
+                    "error": 0.005437246686120214
+                },
+                "kk_K2250_c4": {
+                    "value": -0.004950541928078306,
+                    "name": "kk_u_b_const",
+                    "error": 0.005256441479514432
+                },
+                "kk_K2250_t1": {
+                    "value": -0.00021360641817181662,
+                    "name": "kk_u_b_theta",
+                    "error": 0.007005843422760617
+                },
+                "kk_K2250_t2": {
+                    "value": 0.010303597357378525,
+                    "name": "kk_u_b_theta",
+                    "error": 0.008140897852947209
+                },
+                "kk_K2250_t3": {
+                    "value": 0.00024671548355942384,
+                    "name": "kk_u_b_theta",
+                    "error": 0.006187775640322827
+                },
+                "kk_K2250_t4": {
+                    "value": 0.012140941779029945,
+                    "name": "kk_u_b_theta",
+                    "error": 0.0045048131869127915
+                }
+            }
+        }
+    ]
+}

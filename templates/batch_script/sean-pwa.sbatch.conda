@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#SBATCH --account=caihao1
+#SBATCH --partition=gpu
+#SBATCH --cpus-per-task=5
+#SBATCH --nodes=1
+#SBATCH --gres=gpu:1
+#SBATCH --output="{{log_file}}"
+#SBATCH --job-name=sean_{{run_num}}
+
+module load nvidia/cuda/10.2
+
+source /home/caihao5/project/pcc/anaconda3/bin/activate
+conda activate jax_env
+
+cd $SLURM_SUBMIT_DIR
+
+python3 {{run_file}}

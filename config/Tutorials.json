@@ -1,0 +1,80 @@
+{
+    "mod_info":
+    [
+        {
+            "mod":"phif0_1710", "amp":"phif0", 
+            "prop":
+            {
+                "prop_phi":{"name":"BW","paras":["phi_mass","phi_width","phi"]},
+                "prop_f":{"name":"BW","paras":["f0_mass","f0_width","f"]}
+            },
+            "Sbc":
+            {
+                "phi":"phi", 
+                "f":"f"
+            },
+            "args":
+            {
+            "phi_m":{"value":1.02, "name":"phi_mass", "fix":true}, 
+            "phi_w":{"value":0.004, "name":"phi_width", "fix":true}, 
+            "f1710_m":{"value":1.704, "name":"f0_mass"}, 
+            "f1710_w":{"value":0.123, "name":"f0_width"},
+            "f1710_c1":{"value":0.1, "name":"f0_const"}, 
+            "f1710_c2":{"value":0.1, "name":"f0_const"}, 
+            "f1710_t1":{"value":1.0, "name":"f0_theta", "binding":{"point":"f1710_t2","value":"-12"}},
+            "f1710_t2":{"value":1.0, "name":"f0_theta", "binding":{"point":"f1500_t2","value":"+22"}}
+            }
+        },
+
+        {
+            "mod":"phif0_1500", "amp":"phif0",
+            "prop":
+            {
+                "prop_phi":{"name":"BW","paras":["phi_mass","phi_width","phi"]},
+                "prop_f":{"name":"BW","paras":["f0_mass","f0_width","f"]}
+            },
+            "Sbc":
+            {
+                "phi":"phi", 
+                "f":"f"
+            },
+            "args":
+            {
+            "phi_m":{"value":1.02, "name":"phi_mass", "fix":true}, 
+            "phi_w":{"value":0.004, "name":"phi_width", "fix":true}, 
+            "f1500_m":{"value":1.506, "name":"f0_mass"}, 
+            "f1500_w":{"value":0.112, "name":"f0_width"},
+            "f1500_c1":{"value":0.0, "name":"f0_const"}, 
+            "f1500_c2":{"value":0.0, "name":"f0_const"}, 
+            "f1500_t1":{"value":1.0, "name":"f0_theta"},
+            "f1500_t2":{"value":1.0, "name":"f0_theta"}
+            }
+        },
+
+        {
+            "mod":"phif0_980", "amp":"phif0",
+            "prop":
+            {
+                "prop_phi":{"name":"BW","paras":["phi_mass","phi_width","phi"]},
+                "prop_f":{"name":"flatte980","paras":["f980_mass","f980_g_pipi","f980_rg","f"]}
+            },
+            "Sbc":
+            {
+                "phi":"phi", 
+                "f":"f"
+            },
+            "args":
+            {
+            "phi_m":{"value":1.02, "name":"phi_mass", "fix":true}, 
+            "phi_w":{"value":0.004, "name":"phi_width", "fix":true}, 
+            "f980_m":{"value":0.965, "name":"f980_mass", "fix":true}, 
+            "g_pipi":{"value":0.165, "name":"f980_g_pipi"},
+            "rg":{"value":4.21, "name":"f980_rg"},
+            "f980_c1":{"value":0.0, "name":"f980_const"}, 
+            "f980_c2":{"value":0.0, "name":"f980_const"}, 
+            "f980_t1":{"value":1.0, "name":"f980_theta"},
+            "f980_t2":{"value":1.0, "name":"f980_theta"}
+            }
+        }
+    ]
+}

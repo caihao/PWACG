@@ -1,0 +1,37 @@
+{
+    "version":1,
+    "handlers":
+    {
+        "lasso_streamHandler":
+        {
+            "class":"logging.StreamHandler",
+            "level":"INFO",
+            "formatter":"myFormatter",
+            "stream":"ext://sys.stdout"
+        },
+        "lasso_fileHandler":
+        {
+            "class":"logging.FileHandler",
+            "level":"INFO",
+            "formatter":"myFormatter",
+            "filename":"output/lasso/lasso.log",
+            "mode": "w+",
+            "encoding":"utf8"
+        }
+    },
+    "formatters":
+    {
+        "myFormatter":
+        {
+            "format":"[%(asctime)s %(name)s %(process)d %(levelname)s] %(message)s"
+        }
+    },
+    "loggers":
+    {
+        "lasso":
+        {
+            "level":"INFO",
+            "handlers":["lasso_streamHandler","lasso_fileHandler"]
+        }
+    }
+}

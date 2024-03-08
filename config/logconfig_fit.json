@@ -1,0 +1,37 @@
+{
+    "version":1,
+    "handlers":
+    {
+        "fit_streamHandler":
+        {
+            "class":"logging.StreamHandler",
+            "level":"INFO",
+            "formatter":"myFormatter",
+            "stream":"ext://sys.stdout"
+        },
+        "fit_fileHandler":
+        {
+            "class":"logging.FileHandler",
+            "level":"INFO",
+            "formatter":"myFormatter",
+            "filename":"output/fit/fit.log",
+            "mode": "w+",
+            "encoding":"utf8"
+        }
+    },
+    "formatters":
+    {
+        "myFormatter":
+        {
+            "format":"[%(asctime)s %(name)s %(process)d %(levelname)s] %(message)s"
+        }
+    },
+    "loggers":
+    {
+        "fit":
+        {
+            "level":"INFO",
+            "handlers":["fit_streamHandler","fit_fileHandler"]
+        }
+    }
+}
