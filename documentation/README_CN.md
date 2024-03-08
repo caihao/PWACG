@@ -23,8 +23,6 @@ git clone git@github.com:caihao/PWACG.git
 
 ### 使用 pip 安装依赖
 
-在安装PWACG之前，请确保您已按照的要求安装了JAX和其所有必要的依赖。您可以使用以下命令安装最小依赖：
-
 在安装PWACG之前，请确保已按照 [JAX](https://github.com/google/jax) 的要求安装了JAX及其所有必要的依赖。使用以下命令安装最小依赖集：
 ```bash
 pip install -r requirements-min.txt

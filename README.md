@@ -23,8 +23,6 @@ This will create a folder named `PWACG` in the current directory, containing all
 
 ### Installing Dependencies with pip
 
-Before installing PWACG, please ensure that you have installed JAX and all its necessary dependencies according to the requirements. You can install the minimum dependencies using the following command:
-
 Before installing PWACG, please ensure that you have installed JAX and all its necessary dependencies according to the requirements of [JAX](https://github.com/google/jax). Use the following command to install the minimum set of dependencies:
 
 ```bash
