@@ -1,4 +1,5 @@
 # PWACG - Partial Wave Analysis Code Generator
+[Readme 中文版](documentation/README_CN.md)
 
 PWACG (Partial Wave Analysis Code Generator) is a code generation tool designed specifically for partial wave analysis. Utilizing advanced code generation techniques, it can produce analysis code with extremely fast computation speed and high memory utilization efficiency. This tool supports using the Newton conjugate gradient method for optimization in large-scale data, significantly improving the efficiency of searching for the global optimal solution in partial wave analysis fitting.
 
@@ -74,5 +75,3 @@ This project is licensed under the [MIT License](LICENSE). Please refer to the i
 If you have any questions or suggestions, please feel free to contact us via the following channels:
 
 - GitHub Issues: https://github.com/caihao/PWACG/issues
-
-## [Readme CN](documentation/README_CN.md)

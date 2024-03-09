@@ -58,7 +58,7 @@ python run/fit.py
 
 ## 文档
 
-更详细的使用说明和API文档，请访问 [文档链接](documentation/Tutorial_CN.md).
+更详细的使用说明和API文档，请访问 [文档链接](Tutorial_CN.md).
 
 ## 贡献
 
