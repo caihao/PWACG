@@ -1,6 +1,9 @@
 {
     "external_binding":
     {
+        "pipi_f1525_m":{"point":"kk_f1525_m","value":0},
+        "pipi_f1525_w":{"point":"kk_f1525_w","value":0},
+
         "pipi_f980_m":{"point":"kk_f980_m","value":0}, 
         "pipi_g_pipi":{"point":"kk_g_kk","value":0},
         "pipi_rg":{"point":"kk_rg","value":0},
@@ -22,9 +25,6 @@
 
         "pipi_f1430_m":{"point":"kk_f1430_m","value":0},
         "pipi_f1430_w":{"point":"kk_f1430_w","value":0},
-
-        "pipi_f1525_m":{"point":"kk_f1525_m","value":0},
-        "pipi_f1525_w":{"point":"kk_f1525_w","value":0},
 
         "pipi_f1565_m":{"point":"kk_f1565_m","value":0},
         "pipi_f1565_w":{"point":"kk_f1565_w","value":0},

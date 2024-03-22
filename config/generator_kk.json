@@ -124,11 +124,11 @@
             "Cycles":1,
             "total_frac":
             {
-                "kk":1.25
+                "kk":1.03
             },
-            "boundary":true,
-            "lambda_tfc":100.0,
-            "random":true
+            "boundary":false,
+            "lambda_tfc":0.0,
+            "random":false
         },
         "draw":
         {

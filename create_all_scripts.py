@@ -17,21 +17,7 @@ def checkDirectoryStructure():
     return True
 
 if __name__ == "__main__":
-    os.system("cp templates/scan_draw.py run/")
     checkDirectoryStructure()
-
-    with open("config/generator_combine.json", encoding='utf-8') as f:
-        dict_json = json.loads(f.read())
-        create_combine = create_control.Create_Code(dict_json)
-        create_combine.initial_prepare()
-        create_combine.read_pwa("fit")
-        create_combine.jinja_fit()
-
-        create_combine.initial_prepare()
-        create_combine.read_pwa("draw")
-        create_combine.jinja_draw()
-
-        create_combine.jinja_tensor()
 
     with open("config/generator_kk.json", encoding='utf-8') as f:
         dict_json = json.loads(f.read())
@@ -43,14 +29,4 @@ if __name__ == "__main__":
         create_kk.initial_prepare()
         create_kk.read_pwa("draw")
         create_kk.jinja_draw()
-
-    with open("config/generator_pipi.json", encoding='utf-8') as f:
-        dict_json = json.loads(f.read())
-        create_pipi = create_control.Create_Code(dict_json)
-        create_pipi.initial_prepare()
-        create_pipi.read_pwa("fit")
-        create_pipi.jinja_fit()
-
-        create_pipi.initial_prepare()
-        create_pipi.read_pwa("draw")
-        create_pipi.jinja_draw()
+        create_kk.jinja_tensor()

@@ -48,7 +48,7 @@ python create_all_scripts.py
 
 This command will create a series of scripts based on the data and configuration information you provided, which will be used in the subsequent partial wave analysis process.
 
-### Run the Fitting
+### Run the Fitting Demo
 
 After the script generation is complete, you can use the following command to start the fitting process:
 

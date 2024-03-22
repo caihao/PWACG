@@ -140,7 +140,7 @@
                 "pipi":1.2
             },
             "boundary":false,
-            "random":true,
+            "random":false,
             "lambda_tfc":1e4
         },
         "draw":

@@ -598,7 +598,8 @@ class Prepare_All():
                 temp.update(data_size = float(onp.sum(onp.load("data/weight/weight_{}.npy".format(tag)))))
             else:
                 temp.update(data_size = float(onp.load("data/real_data/{}.npy".format([sbc for sbc in self.sbc_collection if re.match(".*"+tag,sbc)][0])).shape[0]))
-            temp.update(mc_size = float(self.CacheTensor[tag]["mc"]))
+            temp.update(mc_size = float(onp.load("data/mc_truth/{}.npy".format([sbc for sbc in self.sbc_collection if re.match(".*"+tag,sbc)][0])).shape[0]))
+            # temp.update(mc_size = float(self.CacheTensor[tag]["mc"]))
             lh_collection.append(temp)
         self.render_dict.update(lh_coll = lh_collection)
 

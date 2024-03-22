@@ -8,7 +8,7 @@
                 "total_gpu_id":[0,1],
                 "processes_gpus":2,
                 "max_processes":1,
-                "max_processes_memory":0.86,
+                "max_processes_memory":0.89,
                 "thread_gpus":1,
                 "threads_in_one_gpu":1
             },
@@ -156,7 +156,7 @@
         "pipi":
         {
             "data":11016,
-            "mc":400000
+            "mc":800000
         },
         "kk":
         {
