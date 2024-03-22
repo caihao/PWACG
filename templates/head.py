@@ -23,4 +23,7 @@ from jax.config import config
 from jax.experimental.host_callback import id_print
 from scipy.optimize import minimize
 
+from iminuit import minimize as i_minimize
+import pynvml
+
 {% endmacro %}

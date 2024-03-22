@@ -60,9 +60,9 @@ class Control(object):
             threading_list[_] = Thread(target = self.likelihood_in_sigle_device, args = (args_float, _))
             threading_list[_].daemon = 1
         for _ in range(self.thread_gpus):
-             threading_list[_].start()
+            threading_list[_].start()
         for _ in range(self.thread_gpus):
-             threading_list[_].join()
+            threading_list[_].join()
         {% for lh in lh_coll %}
         # result_{{lh.tag}} = onp.sum(self.{{lh.tag}}_data_lh) + {{lh.data_size}}*onp.log(onp.sum(self.{{lh.tag}}_mc_lh))
         result_{{lh.tag}} = onp.sum(self.{{lh.tag}}_data_lh) + {{lh.data_size}}*onp.log(onp.sum(self.{{lh.tag}}_mc_lh)/{{lh.mc_size}})
@@ -87,9 +87,9 @@ class Control(object):
             threading_list[_] = Thread(target = self.jit_grad_likelihood_in_sigle_device, args = (args_float, _))
             threading_list[_].daemon = 1
         for _ in range(self.thread_gpus):
-             threading_list[_].start()
+            threading_list[_].start()
         for _ in range(self.thread_gpus):
-             threading_list[_].join()
+            threading_list[_].join()
         {% for lh in lh_coll %}
         result_{{lh.tag}} = onp.sum(self.{{lh.tag}}_data_grad,axis=(0,1)) + {{lh.data_size}}*onp.sum(self.{{lh.tag}}_mc_grad,axis=(0,1))/onp.sum(self.{{lh.tag}}_mc_grad_v)
         {% endfor %}
@@ -111,9 +111,9 @@ class Control(object):
             threading_list[_] = Thread(target = self.mc_likelihood_in_sigle_device, args = (args_float, _))
             threading_list[_].daemon = 1
         for _ in range(self.thread_gpus):
-             threading_list[_].start()
+            threading_list[_].start()
         for _ in range(self.thread_gpus):
-             threading_list[_].join()
+            threading_list[_].join()
         {% for lh in lh_coll %}
         self.{{lh.tag}}_mc_hvp_value = onp.sum(self.{{lh.tag}}_mc_hvp_v)
         {% endfor %}
@@ -132,9 +132,9 @@ class Control(object):
             threading_list[_] = Thread(target = self.jit_hvp_in_sigle_device, args = (args_float, any_vector, _))
             threading_list[_].daemon = 1
         for _ in range(self.thread_gpus):
-             threading_list[_].start()
+            threading_list[_].start()
         for _ in range(self.thread_gpus):
-             threading_list[_].join()
+            threading_list[_].join()
         self.thread_mc_likelihood(args_float)
         {% for lh in lh_coll %}
         result_{{lh.tag}} = onp.sum(self.{{lh.tag}}_data_hvp, axis=(0,1)) + {{lh.data_size}}*(onp.sum(self.{{lh.tag}}_mc_hvp,axis=(0,1))/self.{{lh.tag}}_mc_hvp_value - onp.einsum("ikm,jln,n->m",self.{{lh.tag}}_mc_hvp_g,self.{{lh.tag}}_mc_hvp_g,any_vector)/(self.{{lh.tag}}_mc_hvp_value**2))

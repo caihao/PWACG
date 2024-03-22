@@ -47,16 +47,47 @@ python create_all_scripts.py
 这个命令会根据您提供的数据和配置信息，创建一系列脚本，用于后续的分波分析过程。
 
 ### 运行拟合 Demo
-1. 从releases中下载data数据。
-2. 
-
+从releases中下载data数据。将zip数据解压到`data`目录中，如果没有请新建，操作如下：
+```bash
+# 创建data目录（如果不存在）
+$ mkdir data
+# 解压数据到data目录
+$ unzip data/data.zip -d data
+```
+解压后的文件目录如下：
+```bash
+$ ls data          
+draw_data  draw_mc  mc_int  mc_truth  real_data  weight
+```
 完成脚本生成后，您可以使用以下命令启动拟合过程：
 
 ```bash
-python run/fit.py
+# 产生符合数据的脚本
+$ python create_all_scripts.py
+# 运行拟合
+$ python run/fit.py
 ```
-
 这将运行 `fit.py` 脚本，开始对您的数据进行分波分析拟合。根据数据量和配置的不同，这个过程可能需要一些时间。
+
+拟合结果画图
+```bash
+# 产生拟合结果的画图脚本
+$ python create_all_scripts.py
+# 产生拟合结果的weight
+$ python run/draw_wt_kk.py
+# 画图
+$ python run/dplot_run_kk.py
+```
+画图的结果目录`output/pictures/partial_mods_pictures`
+
+### 计算公式中的角分布协变张量部分
+计算输入data中每个目录中的`Momentum_kk.npz`，并计算出张量到同一个目录中。
+```
+# 产生这部分代码
+$ python create_all_scripts.py
+# 运行
+$ python run/RunCacheTensor.py
+```
 
 ## 文档
 

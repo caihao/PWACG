@@ -23,7 +23,7 @@
         {
             "run_config":
             {
-                "total_gpu_id":[0,1],
+                "total_gpu_id":[0,1,2,3],
                 "processes_gpus":2,
                 "max_processes":1,
                 "max_processes_memory":0.89,

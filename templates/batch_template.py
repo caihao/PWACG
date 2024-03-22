@@ -70,10 +70,11 @@ class submit(base_batch):
             os.system("mkdir {}".format(result_dir))
             os.system("cp -r config/ {}".format(result_dir))
 
-        self.info["fit"]["lambda_tfc"] = 0.1
+        self.info["fit"]["randomseed"] = n*30 + 100
+        self.info["fit"]["lambda_tfc"] = 0.0
         self.info["fit"]["total_frac"]["kk"] = scanX
         self.info["fit"]["total_frac"]["pipi"] = scanX
-        self.info["fit"]["Cycles"] = 40
+        self.info["fit"]["Cycles"] = 30
         self.info["fit"]["random"] = True
         self.info["fit"]["use_weight"] = False
         self.jinja_fit_info["fit"]["CodeScript"] = "fit_object_{{generator_id}}_{}.py".format(iter_n)
@@ -170,7 +171,7 @@ class submit(base_batch):
 
     def submit(self):
         print("begain to submit job to slurm")
-        frac_tfc = [1.2]*5
+        frac_tfc = [1.2]*10
         # frac_tfc = onp.arange(1.0,1.3,0.05)
 
         # mod_info = self.set_mod_info()
@@ -187,6 +188,89 @@ class submit(base_batch):
 
         for n, scanX in enumerate(frac_tfc):
             self.ordinaryJob(n,scanX)
+    
+    def scan_read_pwa(self, key):
+        self.all_mod_info = list()
+        for addr_pwa_info in self.json_pwa[key]:
+            filename = addr_pwa_info
+            if filename:
+                with open(filename, encoding='utf-8') as f:
+                    print(filename)
+                    dict_json = json.loads(f.read())
+                    if "mod_info" in dict_json:
+                        self.all_mod_info.append(dict_json["mod_info"])
+                    if "external_binding" in dict_json:
+                        self._binding_point = {**self._binding_point, **dict_json["external_binding"]}
+            else:
+                print(" Warning! No such file \"{}\", You should run fit create such file".format(addr_pwa_info))
+
+    def pull(self,n,num):
+        result_dir = f"output/fit/fit_result_{n}"
+        scanX = 1.03
+        self.info["fit"]["lambda_tfc"] = 0.0
+        self.info["fit"]["total_frac"]["kk"] = scanX
+        self.info["fit"]["total_frac"]["pipi"] = scanX
+        self.info["fit"]["Cycles"] = 1
+        self.info["fit"]["random"] = False
+        self.info["fit"]["use_weight"] = False
+        self.jinja_fit_info["fit"]["CodeScript"] = "fit_object_{{generator_id}}_{}.py".format(n)
+        self.jinja_fit_info["fit"]["RunScript"] = "fit_{{generator_id}}_{}.py".format(n)
+        self.jinja_fit_info["fit"]["ResultFile"] = result_dir
+        self.jinja_fit_info["fit"]["CodeTemplate"] = "batch_script/pull_template.py"
+
+        self.json_pwa["fit"] = list()
+        self.json_pwa["fit"].append("config/pwa_info_kk.json")
+        self.scan_read_pwa("fit")
+        self.initial_prepare()
+        self.render_dict.update(my_pull_mc_path=f"data/split_data/real_data_{num}")
+        self.jinja_fit()
+        os.system(f"python run/fit_kk_{n}.py")
+        time.sleep(1)
+
+        self.json_pwa["fit"] = list()
+        self.json_pwa["fit"].append("{}/pwa_info_kk.json.0".format(result_dir))
+        self.scan_read_pwa("fit")
+        self.initial_prepare()
+        self.render_dict.update(my_pull_mc_path=f"data/split_data/real_data_{num}")
+        self.jinja_fit()
+        os.system(f"python run/fit_kk_{n}.py")
+
+        os.system("cp rendered_scripts/fit_object_{{generator_id}}_{}.py {}".format(n,result_dir))
+        os.rename(f"{result_dir}/pwa_info_kk.json.0", f"{result_dir}/pwa_info_kk.json.{num}")
+        os.rename(f"{result_dir}/correlation.npy", f"{result_dir}/correlation.npy.{num}")
+
+    def pull_run(self,n,b,e):
+        for i in range(b,e):
+            self.pull(n,i)
+    
+    def submit_pull(self):
+        epoch = 10
+        batch_size = 10
+        for i in range(epoch):
+            result_dir = f"output/fit/fit_result_{i}"
+            if not os.path.exists(result_dir):
+                os.system("mkdir {}".format(result_dir))
+
+            iter_i = str(i)
+            print("submit {} job".format(iter_i))
+            render_dict = dict()
+            render_dict["run_num"] = iter_i
+            render_dict["generator_id"] = "{{generator_id}}"
+            render_dict["run_file"] = self.cgpwa_dir + "run/temp_pull_run_{}.py".format(iter_i)
+            render_dict["log_file"] = "output/fit/fit_result_{0}/fit_{0}.log".format(iter_i)
+            self.create(render_dict)
+
+            render_dict["begin"] = batch_size*i
+            render_dict["end"] = batch_size*(i+1)
+            env = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
+            template = env.get_template("templates/batch_script/batch_pull.py")
+            template_out = template.render(**render_dict)
+            with open(f"run/temp_pull_run_{iter_i}.py", "w",encoding="utf-8") as f:
+                f.writelines(template_out)
+
+            os.system("sbatch temp.sbatch")
+
+
 
 
 
@@ -396,25 +480,62 @@ class scan(base_batch):
         self.get_slit_args()
         self.get_lh_collection()
 
-    def cal_fraction_error(self):
+    def cal_args(self):
+        # 使用前必须把中心值的配置文件放在config和output里，这样中心值的读出才没问题
+        self.frac_jinja_fit()        
+        intial_parameters = self.render_dict["initial_parameters"]
+        args_list = onp.array(intial_parameters["all_parameters"])
+        float_list = onp.array(intial_parameters["float_index"])
+        source_args = args_list[float_list]
+        def extract_number(file_name):
+            # Extracting the number after the last dot
+            number = file_name.split('.')[-1]
+            return int(number)
+        check_args_list = list()
+        for i in range(10):
+            # json_dir = f"pull_result_980_2340/pull_result_c/fit_result_{i}"
+            json_dir = f"pull_result/fit_result_{i}"
+            files_in_current_dir = os.listdir(json_dir)
+            json_files = list()
+            for f in files_in_current_dir:
+                if os.path.isfile(os.path.join(json_dir, f)):
+                    if f.startswith('pwa') and 'json' in f:
+                        json_files.append(os.path.join(json_dir, f))
+            json_files = sorted(json_files, key=extract_number)
+            for file in json_files[:]:
+                num = file.split(".")[-1]
+                self.json_pwa["fit"] = list()
+                self.json_pwa["fit"].append(file)
+                # self.json_pwa["fit"].append("config/pwa_info_ctrl.json")
+                self.info["fit"]["Cycles"] = 1
+                self.info["fit"]["lambda_tfc"] = 0.0
+                self.jinja_fit_info["fit"]["CodeTemplate"] = "fit_template.py"
+                self.initial_prepare()
+                self.read_pwa("fit")
+                self.frac_jinja_fit()        
+                intial_parameters = self.render_dict["initial_parameters"]
+                args_list = onp.array(intial_parameters["all_parameters"])
+                float_list = onp.array(intial_parameters["float_index"])
+                args_float = args_list[float_list]
+                correlation = onp.load(f"{json_dir}/correlation.npy.{num}")
+                check_list = list()
+                check_list.append(args_float)
+                for _ in range(1000):
+                    check = onp.random.multivariate_normal(args_float,correlation)
+                    check_list.append(check)
+                check_args = onp.array(check_list)
+                check_args_list.append(check_args)
+        onp.savez("output/draw/fraction_paras.npz",args_sample=onp.array(check_args_list),source_args=source_args)
+
+    def cal_fraction_pull(self):
         import rendered_scripts.{{jinja_fit_info.fit.CodeScript|replace('.py','')}} as fit_object
         self.json_pwa["fit"] = list()
         {% for lh in lh_coll %}
         self.json_pwa["fit"].append("output/fit/fit_result_{{generator_id}}/pwa_info_{{lh.tag}}.json")
         {% endfor %}
         self.json_pwa["fit"].append("config/pwa_info_ctrl.json")
-        self.info["fit"]["Cycles"] = 2000
-        # remove constraint
+        self.info["fit"]["Cycles"] = 1
         self.info["fit"]["lambda_tfc"] = 0.0
-
-        # repare check args
-        self.jinja_fit_info["fit"]["CodeTemplate"] = "batch_script/randomArgs.py"
-        self.initial_prepare()
-        self.read_pwa("fit")
-        self.frac_jinja_fit()
-        reload(fit_object)
-        cl = fit_object.Control(self.batch_args)
-        cl.run_multiprocess()
 
         # calculate fraction sample
         self.jinja_fit_info["fit"]["CodeTemplate"] = "batch_script/calFractionError.py"
@@ -425,64 +546,6 @@ class scan(base_batch):
         cl = fit_object.Control(self.batch_args)
         cl.run_multiprocess()
 
-        fraction_sample = onp.load("output/draw/fraction_sample.npy")
-        print(fraction_sample.shape)
-
-        import matplotlib.pyplot as plt
-        who = 3
-        plt.figure(2)
-        plt.hist(fraction_sample[:,who],bins=100,range=(0.0,1.0))
-        plt.savefig("output/draw/fraction.png")
-        fraction_error = list()
-        og_frac = fraction_sample[0,:]
-        print(og_frac)
-        for i in range((fraction_sample.shape)[1]):
-            sample = fraction_sample[:,i]
-            print(sample.shape)
-            sample = sample[sample>(og_frac[i]*0.05)]
-            sigma = onp.sqrt(onp.var(sample))
-            print(sample.shape)
-            # sigma = onp.sqrt(onp.var(fraction_sample[:,i]))
-            fraction_error.append(sigma)
-            print(i)
-            print(sigma)
-            print("***"*18)
-
-        # save in table
-        with open("config/latex.json", encoding='UTF-8') as f:
-            latexjson = json.loads(f.read())
-        mytag = list()
-        {% for lh in lh_coll %}
-        mytag.append("{{lh.tag}}")
-        {% endfor %}
-        i = 0
-        for tag in mytag:
-            with open("output/draw/fit_fraction_table_{}.json".format(tag), encoding='utf-8') as f:
-                result_table = json.loads(f.read())
-            {% for func in func_info %}
-            {%- for num in range(func.num_mod) %}
-            mod_name_list = {{func.mod_name_list[loop.index0]}}
-            for row in result_table:
-                if re.match(row["mod_name"],list(mod_name_list.keys())[0]):
-                    row["fraction error"] = fraction_error[i]
-                    for _tag, _value in latexjson["mod"].items():
-                        if re.match(_tag+".*", row["mod_name"]):
-                            row["mod_name"] = "${}$".format(_value)
-                    i = i + 1
-            {% endfor %}
-            {% endfor %}
-            mypd = pd.DataFrame(result_table)
-            print("***"*8,tag,"***"*8)
-            print(mypd.to_markdown())
-            print(mypd.to_latex(escape=False,float_format="%.6f"))
-
-        check = onp.load("output/draw/fraction_sample.npy")
-        print(check.shape)
-        mean = onp.mean(check[:,who])
-        sigma = onp.std(check[:,who])
-        print("="*20)
-        print(mean)
-        print(sigma)
 
     def Loop(self):
         import rendered_scripts.{{jinja_fit_info.fit.CodeScript|replace('.py','')}} as fit_object
@@ -692,8 +755,6 @@ class scan(base_batch):
                 os.system("cp {0}/pwa_info_kk.json.0 {0}/pwa_info_kk.json.{1}".format(result_dir,str(n)))
                 # with open('scan_select.txt', 'a') as ssf:
                 #     ssf.write(str(cl.fcn[0])+" "+str(scanX)+" "+str(sl.fcn[0])+"\n")
-
-
 
 
 

@@ -32,14 +32,14 @@ class Dxplot(object):
 
     def data_reader(self):
         {% for sbc in sbc_collection %}
-        self.data_{{sbc}} = onp.sqrt(onp.load("data/draw_mc/real_data/{{sbc}}.npy"))
+        self.data_{{sbc}} = onp.sqrt(onp.load("data/real_data/{{sbc}}.npy"))
         # self.data_lorentz_{{sbc}} = self.numpy2lorentz(self.P_{{sbc}})
         # self.data_costheta_{{sbc}} = self.calculate_costheta(self.data_lorentz_{{sbc}})
         {% endfor %}
 
     def mc_reader(self):
         {% for sbc in sbc_collection %}
-        self.mc_{{sbc}} = onp.sqrt(onp.load("data/draw_mc/{{sbc}}.npy"))
+        self.mc_{{sbc}} = onp.sqrt(onp.load("data/mc_truth/{{sbc}}.npy"))
         # self.mc_lorentz_{{sbc}} = self.numpy2lorentz(self.mc_P_{{sbc}})
         # self.mc_costheta_{{sbc}} = self.calculate_costheta(self.mc_lorentz_{{sbc}})
         {% endfor %}

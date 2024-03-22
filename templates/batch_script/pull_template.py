@@ -15,7 +15,7 @@ logger = logging.getLogger("fit")
 
 {{args()}}
 
-{% call ProcessInitializer(data_path="data/real_data",mc_path="data/mc_truth") %}
+{% call ProcessInitializer(data_path=my_pull_mc_path,mc_path="data/mc_truth") %}
 {% endcall %}
 
 {{ProcessReturns()}}
@@ -24,8 +24,7 @@ logger = logging.getLogger("fit")
 {% endcall %}
 
 {% call Control(jinja_fit_info.fit.ResultFile) %}
-        num_seed = onp.random.randint(low=0, high=1000000, size=1, dtype='l')
-        # num_seed = {{info.fit.randomseed}}
+        num_seed=onp.random.randint(low=0, high=1000000, size=1, dtype='l')
         logger.info("random seed: {}".format(num_seed))
         onp.random.seed(num_seed)
         self.args_float = self.args_list[self.float_list]
@@ -42,36 +41,13 @@ logger = logging.getLogger("fit")
         result_info = dict()
         for n in range({{info.fit.Cycles}}):
             {% if info.fit.random %}
-            disturb = 5.0
-            logger.info("disturb of args_float: {}".format(0.5/disturb))
-            self.args_float = self.args_float*((onp.random.rand(self.args_float.shape[0]) - 0.5) / disturb + 1.0)
-            self.args_float[theta_index] = 0.01
-            self.args_float[const_index] = 0.01
+            self.args_float[mass_index] = onp.random.rand() * 0.01 + 1.65
+            self.args_float[width_index] = onp.random.rand() * 0.024 + 0.14
             {% endif %}
             args_float = self.args_float
-
             t1 = time.time()
-
             res = minimize(fun=self.thread_likelihood, x0=args_float, jac=self.thread_grad_likelihood, hessp=self.thread_hvp, method="Newton-CG", callback=self.my_callback, options={"disp":False, "xtol":1e-8})
-
-            # res = minimize(fun=self.thread_likelihood, x0=args_float, jac=self.thread_grad_likelihood, method="BFGS", callback=self.my_callback, options={"disp":False, "gtol":1e-2})
-            # res.nhev = 0
-
-            # res = i_minimize(fun=self.thread_likelihood, x0=args_float, jac=self.thread_grad_likelihood, callback=self.my_callback, options={"disp": False})
-            # res = i_minimize(fun=self.thread_likelihood, x0=args_float, callback=self.my_callback, options={"disp": False})
-            # res.nit = 0
-            # res.nhev = 0
-
             t2 = time.time()
-
-            pynvml.nvmlInit()
-            handle = pynvml.nvmlDeviceGetHandleByIndex(0)  # 获取第一个 GPU 的句柄
-            info = pynvml.nvmlDeviceGetMemoryInfo(handle)
-            used_memory = info.used // 1024**2  # 将字节转换为 MiB
-            total_memory = info.total // 1024**2  # 将字节转换为 MiB
-            print(f"GPU Memory Usage: {used_memory} MiB / {total_memory} MiB")
-            pynvml.nvmlShutdown()
-
             logger.info("{0} {1} {2}".format("="*15,str(n),"="*15))
             logger.info("fcn: {}".format(res.fun))
             logger.info("success: {}".format(res.success))
@@ -93,6 +69,7 @@ logger = logging.getLogger("fit")
             # 这里的binding的参数回填没有加上value因为在代码生成后会自动加上value(保存的json产生的画图代码会加上value)
             fvalue[{{binding_point.goto0}}] = fvalue[{{binding_point.goto1}}]
             {% endif %}
+            # if res.fun < min_fcn and res.success:
             if res.fun < min_fcn:
                 min_fcn = res.fun
 
@@ -102,10 +79,8 @@ logger = logging.getLogger("fit")
                 v = onp.zeros(args_float_size)
                 v[x] = 1.0
                 my_hessian[:,x] = self.thread_hvp(args_float,v)
-
+            # print("eig :",onp.linalg.eig(my_hessian)[0])
             ferror = onp.sqrt(onp.diag(onp.linalg.inv(my_hessian)))
-            # ferror = onp.sqrt(onp.diag(res.hess_inv))
-
             fvalue_float = fvalue[self.float_list]
             error = onp.zeros((self.args_list.shape)[0])
             for i, locate in enumerate(self.float_list):
@@ -118,7 +93,8 @@ logger = logging.getLogger("fit")
 
             correlation = onp.linalg.inv(my_hessian)
             print("correlation :",correlation)
-            onp.save("correlation",correlation)
+
+            onp.save("{{jinja_fit_info.fit.ResultFile}}/correlation",correlation)
 
         min_fcn = [min_fcn]
         logger.info("{0} the minist value {1} {0}".format("*"*4,min_fcn))

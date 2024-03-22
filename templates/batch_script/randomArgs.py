@@ -15,7 +15,7 @@ logger = logging.getLogger("fit")
 
 {{args()}}
 
-{% call ProcessInitializer(data_path="data/real_data",mc_path="data/mc_int") %}
+{% call ProcessInitializer(data_path="data/real_data",mc_path="data/mc_truth") %}
 {% endcall %}
 
 {{ProcessReturns()}}

@@ -49,14 +49,56 @@ python create_all_scripts.py
 This command will create a series of scripts based on the data and configuration information you provided, which will be used in the subsequent partial wave analysis process.
 
 ### Run the Fitting Demo
-
-After the script generation is complete, you can use the following command to start the fitting process:
+To run the fitting demo, first download the data from the releases. Unzip the data into the `data` directory. If the directory doesn't exist, create it as follows:
 
 ```bash
-python run/fit.py
+# Create the data directory (if it doesn't exist)
+$ mkdir data
+# Unzip the data into the data directory
+$ unzip data/data.zip -d data
 ```
 
-This will run the `fit.py` script and start the partial wave analysis fitting on your data. Depending on the size of the data and the configuration, this process may take some time.
+After unzipping, the directory structure should look like this:
+
+```bash
+$ ls data          
+draw_data  draw_mc  mc_int  mc_truth  real_data  weight
+```
+
+Once the scripts are generated, you can start the fitting process with the following commands:
+
+```bash
+# Generate the script for the fitting data
+$ python create_all_scripts.py
+# Run the fitting
+$ python run/fit.py
+```
+
+This will execute the `fit.py` script and begin the partial wave analysis fitting process on your data. Depending on the volume of data and the configuration, this process may take some time.
+
+### Plotting the Fitting Results
+To plot the fitting results, generate the plotting scripts and produce the weights, then execute the plotting script as follows:
+
+```bash
+# Generate the script for plotting the fitting results
+$ python create_all_scripts.py
+# Generate the weights for the fitting results
+$ python run/draw_wt_kk.py
+# Plot the results
+$ python run/dplot_run_kk.py
+```
+
+The resulting plots will be saved in the `output/pictures/partial_mods_pictures` directory.
+
+### Calculate the Covariant Tensor of the Angular Distribution
+To compute the covariant tensor of the angular distribution from the `Momentum_kk.npz` file in each directory of the input data, you can generate and run the necessary scripts as follows:
+
+```bash
+# Generate the scripts
+$ python create_all_scripts.py
+# Run the calculation
+$ python run/RunCacheTensor.py
+```
 
 ## Documentation
 
