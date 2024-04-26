@@ -71,10 +71,10 @@ Once the scripts are generated, you can start the fitting process with the follo
 # Generate the script for the fitting data
 $ python create_all_scripts.py
 # Run the fitting
-$ python run/fit.py
+$ python run/fit_kk.py
 ```
 
-This will execute the `fit.py` script and begin the partial wave analysis fitting process on your data. Depending on the volume of data and the configuration, this process may take some time.
+This will execute the `fit_kk.py` script and begin the partial wave analysis fitting process on your data. Depending on the volume of data and the configuration, this process may take some time.
 
 ### Plotting the Fitting Results
 To plot the fitting results, generate the plotting scripts and produce the weights, then execute the plotting script as follows:

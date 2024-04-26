@@ -65,9 +65,9 @@ draw_data  draw_mc  mc_int  mc_truth  real_data  weight
 # 产生符合数据的脚本
 $ python create_all_scripts.py
 # 运行拟合
-$ python run/fit.py
+$ python run/fit_kk.py
 ```
-这将运行 `fit.py` 脚本，开始对您的数据进行分波分析拟合。根据数据量和配置的不同，这个过程可能需要一些时间。
+这将运行 `fit_kk.py` 脚本，开始对您的数据进行分波分析拟合。根据数据量和配置的不同，这个过程可能需要一些时间。
 
 拟合结果画图
 ```bash
