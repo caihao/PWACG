@@ -40,23 +40,23 @@
                     "error": 0.0
                 },
                 "pipi_f980_m": {
-                    "value": 0.9654588595484986,
+                    "value": 0.9724248098676344,
                     "name": "pipi_f980_mass",
                     "range": [
-                        0.98,
-                        0.01
+                        0.9894,
+                        0.0013
                     ],
-                    "error": 0.0009082580967032066
+                    "error": 0.00045597319542829484
                 },
                 "pipi_g_pipi": {
-                    "value": 0.06245951091730656,
+                    "value": 0.06201313432814033,
                     "name": "pipi_f980_g_pipi",
-                    "error": 0.0006899979806209123
+                    "error": 0.0012238250518854354
                 },
                 "pipi_rg": {
-                    "value": 2.332804555253618,
+                    "value": 1.3169762577503408,
                     "name": "pipi_f980_rg",
-                    "error": 0.08342891810710702
+                    "error": 0.1161958699000806
                 },
                 "pipi_f980_c1": {
                     "value": 0.1,
@@ -65,9 +65,9 @@
                     "error": 0.0
                 },
                 "pipi_f980_c2": {
-                    "value": 0.08188306003013818,
+                    "value": 0.05556107968442361,
                     "name": "pipi_f980_const",
-                    "error": NaN
+                    "error": 0.0012743090107579255
                 },
                 "pipi_f980_t1": {
                     "value": 0.1,
@@ -76,15 +76,15 @@
                     "error": 0.0
                 },
                 "pipi_f980_t2": {
-                    "value": 0.05599167307135792,
+                    "value": 0.058719694648431235,
                     "name": "pipi_f980_theta",
-                    "error": NaN
+                    "error": 0.0014964498584950463
                 }
             }
         },
         {
-            "mod": "phif0_500_pipi",
-            "amp": "phif0_pipi",
+            "mod": "phif2_long_pipi",
+            "amp": "phif2_pipi",
             "prop": {
                 "prop_phi": {
                     "name": "BW",
@@ -97,8 +97,8 @@
                 "prop_f": {
                     "name": "BW",
                     "paras": [
-                        "pipi_f0_mass",
-                        "pipi_f0_width",
+                        "pipi_f2_mass",
+                        "pipi_f2_width",
                         "f_pipi"
                     ]
                 }
@@ -120,43 +120,66 @@
                     "fix": true,
                     "error": 0.0
                 },
-                "pipi_f500_m": {
-                    "value": 0.3671983200599854,
-                    "name": "pipi_f0_mass",
-                    "range": [
-                        0.475,
-                        0.001
-                    ],
-                    "error": 0.006413765294615035
-                },
-                "pipi_f500_w": {
-                    "value": 0.6238020953133894,
-                    "name": "pipi_f0_width",
-                    "range": [
-                        0.55,
-                        0.001
-                    ],
-                    "error": 0.010571695709188695
-                },
-                "pipi_f500_c1": {
-                    "value": -0.02929360290320169,
-                    "name": "pipi_f0_const",
-                    "error": 0.0003862350186339925
-                },
-                "pipi_f500_c2": {
-                    "value": -0.0567787987938749,
-                    "name": "pipi_f0_const",
+                "pipi_f2long_m": {
+                    "value": 0.00011463626093534355,
+                    "name": "pipi_f2_mass",
                     "error": NaN
                 },
-                "pipi_f500_t1": {
-                    "value": -0.05455637228521208,
-                    "name": "pipi_f0_theta",
-                    "error": NaN
+                "pipi_f2long_w": {
+                    "value": 99999.999999614,
+                    "name": "pipi_f2_width",
+                    "fix": true,
+                    "error": 0.0
                 },
-                "pipi_f500_t2": {
-                    "value": -0.02116074547976063,
-                    "name": "pipi_f0_theta",
-                    "error": NaN
+                "pipi_f2long_c1": {
+                    "value": 0.19593799560695832,
+                    "name": "pipi_f2_const",
+                    "error": 0.24800143192199983
+                },
+                "pipi_f2long_c2": {
+                    "value": 0.012470654562124503,
+                    "name": "pipi_f2_const",
+                    "error": 0.2929856441672027
+                },
+                "pipi_f2long_c3": {
+                    "value": -0.2851953718845401,
+                    "name": "pipi_f2_const",
+                    "error": 0.15618434692987687
+                },
+                "pipi_f2long_c4": {
+                    "value": 0.06636450912056047,
+                    "name": "pipi_f2_const",
+                    "error": 0.13818614384390335
+                },
+                "pipi_f2long_c5": {
+                    "value": 0.12258876881362349,
+                    "name": "pipi_f2_const",
+                    "error": 0.1840872912503934
+                },
+                "pipi_f2long_t1": {
+                    "value": -0.26548751314553765,
+                    "name": "pipi_f2_theta",
+                    "error": 0.17802056528353677
+                },
+                "pipi_f2long_t2": {
+                    "value": -0.36618769900909337,
+                    "name": "pipi_f2_theta",
+                    "error": 0.18188446463779226
+                },
+                "pipi_f2long_t3": {
+                    "value": -0.004015287851150053,
+                    "name": "pipi_f2_theta",
+                    "error": 0.10436536021040116
+                },
+                "pipi_f2long_t4": {
+                    "value": -0.10936476452402297,
+                    "name": "pipi_f2_theta",
+                    "error": 0.15018296342495496
+                },
+                "pipi_f2long_t5": {
+                    "value": 0.03974260858725838,
+                    "name": "pipi_f2_theta",
+                    "error": 0.16927929790992835
                 }
             }
         },
@@ -199,72 +222,306 @@
                     "error": 0.0
                 },
                 "pipi_f1270_m": {
-                    "value": 1.2770282795822923,
+                    "value": 1.2749385691974562,
                     "name": "pipi_f1270_mass",
                     "range": [
                         1.2755,
-                        0.01
+                        0.0008
                     ],
-                    "error": 0.00251273390324006
+                    "error": 0.0007685071367458856
                 },
                 "pipi_f1270_w": {
-                    "value": 0.19956232661286105,
+                    "value": 0.19763058070641237,
                     "name": "pipi_f1270_width",
                     "range": [
-                        0.1867,
-                        0.01
+                        0.19,
+                        0.0023
                     ],
-                    "error": 0.0012577578358798172
+                    "error": 0.0020975731161581995
                 },
                 "pipi_f1270_c1": {
-                    "value": 0.0570021428038847,
+                    "value": -0.28948044578199356,
                     "name": "pipi_f1270_const",
-                    "error": 0.013264757509552543
+                    "error": 0.016150666110579165
                 },
                 "pipi_f1270_c2": {
-                    "value": 0.1443833755997735,
+                    "value": -0.2287768898373971,
                     "name": "pipi_f1270_const",
-                    "error": 0.009710876705025556
+                    "error": 0.013852868377426606
                 },
                 "pipi_f1270_c3": {
-                    "value": -0.04593086484557203,
+                    "value": -0.15990707497126008,
                     "name": "pipi_f1270_const",
-                    "error": 0.01094507608246973
+                    "error": 0.008797772653280035
                 },
                 "pipi_f1270_c4": {
-                    "value": -0.19249242695414065,
+                    "value": -0.3111602274560316,
                     "name": "pipi_f1270_const",
-                    "error": 0.009511227638859154
+                    "error": 0.012455276294938183
                 },
                 "pipi_f1270_c5": {
-                    "value": 0.11322459527660121,
+                    "value": -0.010516980549299932,
                     "name": "pipi_f1270_const",
-                    "error": 0.009719906387517964
+                    "error": 0.012038835253022143
                 },
                 "pipi_f1270_t1": {
-                    "value": 0.2563464599193975,
+                    "value": 0.14018260123371015,
                     "name": "pipi_f1270_theta",
-                    "error": 0.009051705395178945
+                    "error": 0.017922909219429444
                 },
                 "pipi_f1270_t2": {
-                    "value": 0.3680368657751172,
+                    "value": 0.1881222869727493,
                     "name": "pipi_f1270_theta",
-                    "error": 0.008592869861336396
+                    "error": 0.01720507105848185
                 },
                 "pipi_f1270_t3": {
-                    "value": 0.007383429006147608,
+                    "value": 0.006260133696345951,
                     "name": "pipi_f1270_theta",
-                    "error": 0.006190875203327145
+                    "error": 0.01016349390962459
                 },
                 "pipi_f1270_t4": {
-                    "value": 0.21832663792338788,
+                    "value": -0.13620306008300462,
                     "name": "pipi_f1270_theta",
-                    "error": 0.00984090843965098
+                    "error": 0.007700290072434218
                 },
                 "pipi_f1270_t5": {
-                    "value": 0.07914724172913952,
+                    "value": -0.007470655615079892,
                     "name": "pipi_f1270_theta",
-                    "error": 0.009360291549569995
+                    "error": 0.01451974338858024
+                }
+            }
+        },
+        {
+            "mod": "phif0_500_pipi",
+            "amp": "phif0_pipi",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_pipi"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "pipi_f0_mass",
+                        "pipi_f0_width",
+                        "f_pipi"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_pipi",
+                "f": "f_pipi"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "pipi_f500_m": {
+                    "value": 0.5354097341749176,
+                    "name": "pipi_f0_mass",
+                    "range": [
+                        0.535,
+                        0.001
+                    ],
+                    "error": 0.0009939101465206118
+                },
+                "pipi_f500_w": {
+                    "value": 0.64327770927252,
+                    "name": "pipi_f0_width",
+                    "range": [
+                        0.643,
+                        0.001
+                    ],
+                    "error": 0.0009988769797638734
+                },
+                "pipi_f500_c1": {
+                    "value": -0.061229252776713226,
+                    "name": "pipi_f0_const",
+                    "error": NaN
+                },
+                "pipi_f500_c2": {
+                    "value": 0.01321566941402248,
+                    "name": "pipi_f0_const",
+                    "error": NaN
+                },
+                "pipi_f500_t1": {
+                    "value": -0.12302486567296148,
+                    "name": "pipi_f0_theta",
+                    "error": 0.0021902115319766113
+                },
+                "pipi_f500_t2": {
+                    "value": -0.06914488142362417,
+                    "name": "pipi_f0_theta",
+                    "error": 0.0024991454065803158
+                }
+            }
+        },
+        {
+            "mod": "phif0_1370_pipi",
+            "amp": "phif0_pipi",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_pipi"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "pipi_f0_mass",
+                        "pipi_f0_width",
+                        "f_pipi"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_pipi",
+                "f": "f_pipi"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "pipi_f1370_m": {
+                    "value": 1.349717494883055,
+                    "name": "pipi_f0_mass",
+                    "range": [
+                        1.35,
+                        0.001
+                    ],
+                    "error": 0.0009968940777099384
+                },
+                "pipi_f1370_w": {
+                    "value": 0.2653618704235103,
+                    "name": "pipi_f0_width",
+                    "range": [
+                        0.265,
+                        0.001
+                    ],
+                    "error": 0.0009939324298758308
+                },
+                "pipi_f1370_c1": {
+                    "value": -0.047447647225283586,
+                    "name": "pipi_f0_const",
+                    "error": 0.00330981420264212
+                },
+                "pipi_f1370_c2": {
+                    "value": -0.10167038857083334,
+                    "name": "pipi_f0_const",
+                    "error": 0.003805833002202149
+                },
+                "pipi_f1370_t1": {
+                    "value": -0.026759727114845686,
+                    "name": "pipi_f0_theta",
+                    "error": 0.004049272219046986
+                },
+                "pipi_f1370_t2": {
+                    "value": 0.03449505242390819,
+                    "name": "pipi_f0_theta",
+                    "error": NaN
+                }
+            }
+        },
+        {
+            "mod": "phif0_1710_pipi",
+            "amp": "phif0_pipi",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_pipi"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "pipi_f0_mass",
+                        "pipi_f0_width",
+                        "f_pipi"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_pipi",
+                "f": "f_pipi"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "pipi_f1710_m": {
+                    "value": 1.7429326969512242,
+                    "name": "pipi_f0_mass",
+                    "range": [
+                        1.727,
+                        0.013
+                    ],
+                    "error": 0.0032528849561926825
+                },
+                "pipi_f1710_w": {
+                    "value": 0.1401132893965101,
+                    "name": "pipi_f0_width",
+                    "range": [
+                        0.168,
+                        0.046
+                    ],
+                    "error": 0.005981655221242172
+                },
+                "pipi_f1710_c1": {
+                    "value": -0.038003407032253446,
+                    "name": "pipi_f0_const",
+                    "error": 0.0026915112625785086
+                },
+                "pipi_f1710_c2": {
+                    "value": -0.012093629165683318,
+                    "name": "pipi_f0_const",
+                    "error": 0.0022972685646874586
+                },
+                "pipi_f1710_t1": {
+                    "value": 0.009866131088933382,
+                    "name": "pipi_f0_theta",
+                    "error": NaN
+                },
+                "pipi_f1710_t2": {
+                    "value": 0.009799190956835622,
+                    "name": "pipi_f0_theta",
+                    "error": 0.004151575404029269
                 }
             }
         },
@@ -307,77 +564,77 @@
                     "error": 0.0
                 },
                 "pipi_f1525_m": {
-                    "value": 1.5454579862179654,
+                    "value": 1.5136879291379208,
                     "name": "pipi_f2_mass",
                     "range": [
-                        1.5174,
-                        0.01
+                        1.514,
+                        0.0025
                     ],
-                    "error": 0.0020166248377409815
+                    "error": 0.002407051319501633
                 },
                 "pipi_f1525_w": {
-                    "value": 0.0719340987357962,
+                    "value": 0.08926814962664145,
                     "name": "pipi_f2_width",
                     "range": [
-                        0.086,
-                        0.01
+                        0.0892,
+                        0.003
                     ],
-                    "error": 0.002458954393404639
+                    "error": 0.0029620204132716505
                 },
                 "pipi_f1525_c1": {
-                    "value": -0.05839795660334793,
+                    "value": 0.0021291008657941778,
                     "name": "pipi_f2_const",
-                    "error": 0.0020600782733467948
+                    "error": 0.002478854021357045
                 },
                 "pipi_f1525_c2": {
-                    "value": -0.02235000832053778,
+                    "value": -0.0044160873247314995,
                     "name": "pipi_f2_const",
-                    "error": 0.0021382228377267213
+                    "error": 0.0025732337463481646
                 },
                 "pipi_f1525_c3": {
-                    "value": -0.016174847397104557,
+                    "value": 0.005413562508201503,
                     "name": "pipi_f2_const",
-                    "error": 0.0031589582692415604
+                    "error": 0.001693792563610448
                 },
                 "pipi_f1525_c4": {
-                    "value": -0.00890576648339417,
+                    "value": -0.004920641109982332,
                     "name": "pipi_f2_const",
-                    "error": 0.0018098427855270669
+                    "error": 0.0022223131720203416
                 },
                 "pipi_f1525_c5": {
-                    "value": -9.643592621690244e-05,
+                    "value": 0.00992055101636127,
                     "name": "pipi_f2_const",
-                    "error": 0.0021823002164935907
+                    "error": 0.0018071403605808797
                 },
                 "pipi_f1525_t1": {
-                    "value": 0.017496775839310492,
+                    "value": 0.017861577992163716,
                     "name": "pipi_f2_theta",
-                    "error": 0.002791630073655774
+                    "error": 0.002824411647755578
                 },
                 "pipi_f1525_t2": {
-                    "value": 0.014158269050697236,
+                    "value": -0.007411316073807279,
                     "name": "pipi_f2_theta",
-                    "error": 0.002016046851232763
+                    "error": 0.0029756543096631366
                 },
                 "pipi_f1525_t3": {
-                    "value": -0.003712854458782321,
+                    "value": -0.00302031736102215,
                     "name": "pipi_f2_theta",
-                    "error": 0.001422101065585947
+                    "error": 0.0016387306517563983
                 },
                 "pipi_f1525_t4": {
-                    "value": -0.016427954395041616,
+                    "value": -0.019809040251656265,
                     "name": "pipi_f2_theta",
-                    "error": 0.002785518126434665
+                    "error": 0.0027984834646430866
                 },
                 "pipi_f1525_t5": {
-                    "value": 0.012103157207157217,
+                    "value": -0.008502812451102041,
                     "name": "pipi_f2_theta",
-                    "error": 0.0024974787960471917
+                    "error": 0.0023333012085913194
                 }
             }
         },
         {
-            "mod": "phif2_2300_pipi",
+            "mod": "phif2_2340_pipi",
             "amp": "phif2_pipi",
             "prop": {
                 "prop_phi": {
@@ -414,73 +671,591 @@
                     "fix": true,
                     "error": 0.0
                 },
-                "pipi_f2300_m": {
-                    "value": 2.5951469674717558,
+                "pipi_f2340_m": {
+                    "value": 2.358404803018378,
                     "name": "pipi_f2_mass",
                     "range": [
-                        2.297,
-                        0.0001
+                        2.346,
+                        0.015
                     ],
-                    "error": NaN
+                    "error": 0.0157429841069819
                 },
-                "pipi_f2300_w": {
-                    "value": 0.3422424835923914,
+                "pipi_f2340_w": {
+                    "value": 0.32230729542561604,
                     "name": "pipi_f2_width",
                     "range": [
-                        0.148,
-                        0.0001
+                        0.331,
+                        0.005
                     ],
-                    "error": 0.009195102415540326
+                    "error": 0.015770569761257812
                 },
-                "pipi_f2300_c1": {
-                    "value": 0.4839253961328694,
+                "pipi_f2340_c1": {
+                    "value": -0.06528885213439543,
                     "name": "pipi_f2_const",
-                    "error": 0.022012603062983714
+                    "error": 0.04610674207647126
                 },
-                "pipi_f2300_c2": {
-                    "value": 0.3504831693704474,
+                "pipi_f2340_c2": {
+                    "value": 0.04452264408456644,
                     "name": "pipi_f2_const",
-                    "error": 0.02085349805342457
+                    "error": 0.06185261193911097
                 },
-                "pipi_f2300_c3": {
-                    "value": 0.19752647138064858,
+                "pipi_f2340_c3": {
+                    "value": -0.107290680261427,
                     "name": "pipi_f2_const",
-                    "error": 0.030103540140079
+                    "error": 0.0261993682455362
                 },
-                "pipi_f2300_c4": {
-                    "value": -0.04116451703796123,
+                "pipi_f2340_c4": {
+                    "value": 0.07691582203817222,
                     "name": "pipi_f2_const",
-                    "error": 0.019973906976325586
+                    "error": 0.032793426056966085
                 },
-                "pipi_f2300_c5": {
-                    "value": 0.34420176379267686,
+                "pipi_f2340_c5": {
+                    "value": 0.11548786065181287,
                     "name": "pipi_f2_const",
-                    "error": 0.022567179611789535
+                    "error": 0.04413070978376142
                 },
-                "pipi_f2300_t1": {
-                    "value": 0.5490191785857813,
+                "pipi_f2340_t1": {
+                    "value": 0.08228768819964466,
                     "name": "pipi_f2_theta",
-                    "error": 0.017003139262707606
+                    "error": 0.0376988400370015
                 },
-                "pipi_f2300_t2": {
-                    "value": 0.3834406694234334,
+                "pipi_f2340_t2": {
+                    "value": 0.073324529135149,
                     "name": "pipi_f2_theta",
-                    "error": 0.026438905451759476
+                    "error": 0.04096208452852053
                 },
-                "pipi_f2300_t3": {
-                    "value": 0.20444192151791063,
+                "pipi_f2340_t3": {
+                    "value": 0.039490961764765124,
                     "name": "pipi_f2_theta",
-                    "error": 0.013576837779783697
+                    "error": 0.029746295014033947
                 },
-                "pipi_f2300_t4": {
-                    "value": 0.5186736078751454,
+                "pipi_f2340_t4": {
+                    "value": -0.03521763160100088,
                     "name": "pipi_f2_theta",
-                    "error": 0.01903887272925804
+                    "error": 0.029054415293921335
                 },
-                "pipi_f2300_t5": {
-                    "value": -0.07921879079619332,
+                "pipi_f2340_t5": {
+                    "value": 0.03962078781954461,
                     "name": "pipi_f2_theta",
-                    "error": 0.029856308685938627
+                    "error": 0.050774841761215384
+                }
+            }
+        },
+        {
+            "mod": "phif0_2470_pipi",
+            "amp": "phif0_pipi",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_pipi"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "pipi_f0_mass",
+                        "pipi_f0_width",
+                        "f_pipi"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_pipi",
+                "f": "f_pipi"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "pipi_f2470_m": {
+                    "value": 2.5214487728458512,
+                    "name": "pipi_f0_mass",
+                    "range": [
+                        2.47,
+                        0.007
+                    ],
+                    "error": 0.003966172274506066
+                },
+                "pipi_f2470_w": {
+                    "value": 0.1139925770684733,
+                    "name": "pipi_f0_width",
+                    "range": [
+                        0.11,
+                        0.002
+                    ],
+                    "error": 0.0013825561866270331
+                },
+                "pipi_f2470_c1": {
+                    "value": -0.10420112973251186,
+                    "name": "pipi_f0_const",
+                    "error": 0.00603961239291663
+                },
+                "pipi_f2470_c2": {
+                    "value": -0.010420986194312446,
+                    "name": "pipi_f0_const",
+                    "error": 0.009266977458468972
+                },
+                "pipi_f2470_t1": {
+                    "value": -0.06171649795572718,
+                    "name": "pipi_f0_theta",
+                    "error": 0.008035292724343782
+                },
+                "pipi_f2470_t2": {
+                    "value": 0.06992684680461181,
+                    "name": "pipi_f0_theta",
+                    "error": 0.00896995728264409
+                }
+            }
+        },
+        {
+            "mod": "phif2_2150_pipi",
+            "amp": "phif2_pipi",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_pipi"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "pipi_f2_mass",
+                        "pipi_f2_width",
+                        "f_pipi"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_pipi",
+                "f": "f_pipi"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "pipi_f2150_m": {
+                    "value": 2.1494881684031237,
+                    "name": "pipi_f2_mass",
+                    "range": [
+                        2.157,
+                        0.006
+                    ],
+                    "error": 0.004103523660540442
+                },
+                "pipi_f2150_w": {
+                    "value": 0.43613899293565234,
+                    "name": "pipi_f2_width",
+                    "range": [
+                        0.436,
+                        0.001
+                    ],
+                    "error": 0.0007070681594935382
+                },
+                "pipi_f2150_c1": {
+                    "value": -0.4409106534664805,
+                    "name": "pipi_f2_const",
+                    "error": NaN
+                },
+                "pipi_f2150_c2": {
+                    "value": -0.3714689331857065,
+                    "name": "pipi_f2_const",
+                    "error": 0.027574279132698654
+                },
+                "pipi_f2150_c3": {
+                    "value": -0.0888949060128173,
+                    "name": "pipi_f2_const",
+                    "error": 0.02227302928929525
+                },
+                "pipi_f2150_c4": {
+                    "value": -0.18248648248599547,
+                    "name": "pipi_f2_const",
+                    "error": 0.02663548832031886
+                },
+                "pipi_f2150_c5": {
+                    "value": -0.1608389649959068,
+                    "name": "pipi_f2_const",
+                    "error": 0.03317307223709641
+                },
+                "pipi_f2150_t1": {
+                    "value": -0.2593873741850893,
+                    "name": "pipi_f2_theta",
+                    "error": 0.03264546328389421
+                },
+                "pipi_f2150_t2": {
+                    "value": 0.06672684154071319,
+                    "name": "pipi_f2_theta",
+                    "error": 0.05313745356230006
+                },
+                "pipi_f2150_t3": {
+                    "value": -0.058567198786899484,
+                    "name": "pipi_f2_theta",
+                    "error": 0.02529419363946652
+                },
+                "pipi_f2150_t4": {
+                    "value": 0.18063025841005062,
+                    "name": "pipi_f2_theta",
+                    "error": 0.023491937529203196
+                },
+                "pipi_f2150_t5": {
+                    "value": -0.07674143610691805,
+                    "name": "pipi_f2_theta",
+                    "error": 0.03426822943222774
+                }
+            }
+        },
+        {
+            "mod": "rho1700_pipi",
+            "amp": "u_rho_r_pipi",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_pipi"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "pipi_u_rho_mass",
+                        "pipi_u_rho_width",
+                        "b124_pipi"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_pipi",
+                "b1": "b124_pipi"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "pipi_rho1700_m": {
+                    "value": 1.8513794498613898,
+                    "range": [
+                        1.8823,
+                        0.01
+                    ],
+                    "name": "pipi_u_rho_mass",
+                    "error": 0.006169442229145059
+                },
+                "pipi_rho1700_w": {
+                    "value": 0.1313660735278949,
+                    "range": [
+                        0.1,
+                        0.1
+                    ],
+                    "name": "pipi_u_rho_width",
+                    "error": NaN
+                },
+                "pipi_rho1700_c1": {
+                    "value": -0.009250919729243731,
+                    "name": "pipi_u_rho_const",
+                    "error": 0.0015427373233720594
+                },
+                "pipi_rho1700_t1": {
+                    "value": -0.0011602054060865681,
+                    "name": "pipi_u_rho_theta",
+                    "error": NaN
+                }
+            }
+        },
+        {
+            "mod": "rho1700_pipi",
+            "amp": "u_rho_l_pipi",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_pipi"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "pipi_u_rho_mass",
+                        "pipi_u_rho_width",
+                        "b123_pipi"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_pipi",
+                "b2": "b123_pipi"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "pipi_rho1700_m": {
+                    "value": 1.8513794498613898,
+                    "range": [
+                        1.8823,
+                        0.01
+                    ],
+                    "name": "pipi_u_rho_mass",
+                    "error": 0.006169442229145059
+                },
+                "pipi_rho1700_w": {
+                    "value": 0.1313660735278949,
+                    "range": [
+                        0.1,
+                        0.1
+                    ],
+                    "name": "pipi_u_rho_width",
+                    "error": NaN
+                },
+                "pipi_rho1700_c1": {
+                    "value": -0.009250919729243731,
+                    "name": "pipi_u_rho_const",
+                    "error": 0.0015427373233720594
+                },
+                "pipi_rho1700_t1": {
+                    "value": -0.0011602054060865681,
+                    "name": "pipi_u_rho_theta",
+                    "error": NaN
+                }
+            }
+        },
+        {
+            "mod": "K1830_pipi",
+            "amp": "u_b_r_pipi",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_pipi"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "pipi_u_b_mass",
+                        "pipi_u_b_width",
+                        "b124_pipi"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_pipi",
+                "b1": "b124_pipi"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "pipi_K1830_m": {
+                    "value": 1.833891806023835,
+                    "range": [
+                        1.83,
+                        0.1
+                    ],
+                    "name": "pipi_u_b_mass",
+                    "error": 0.005188861852577167
+                },
+                "pipi_K1830_w": {
+                    "value": 0.32071140616916155,
+                    "range": [
+                        0.31,
+                        0.1
+                    ],
+                    "name": "pipi_u_b_width",
+                    "error": 0.006168664642136837
+                },
+                "pipi_K1830_c1": {
+                    "value": -0.09344540542076364,
+                    "name": "pipi_u_b_const",
+                    "error": 0.0028154723832329895
+                },
+                "pipi_K1830_c2": {
+                    "value": -0.043136472672836886,
+                    "name": "pipi_u_b_const",
+                    "error": 0.004116099097187444
+                },
+                "pipi_K1830_c3": {
+                    "value": -0.0007561936971118836,
+                    "name": "pipi_u_b_const",
+                    "error": 0.004227177255360261
+                },
+                "pipi_K1830_c4": {
+                    "value": 0.018874616088269645,
+                    "name": "pipi_u_b_const",
+                    "error": 0.002698150349157523
+                },
+                "pipi_K1830_t1": {
+                    "value": -0.010822687421108044,
+                    "name": "pipi_u_b_theta",
+                    "error": 0.0037176283216583984
+                },
+                "pipi_K1830_t2": {
+                    "value": -0.040722568342230044,
+                    "name": "pipi_u_b_theta",
+                    "error": 0.004982819930055716
+                },
+                "pipi_K1830_t3": {
+                    "value": -0.026196927067868466,
+                    "name": "pipi_u_b_theta",
+                    "error": 0.00443751922573855
+                },
+                "pipi_K1830_t4": {
+                    "value": -0.02641076251926599,
+                    "name": "pipi_u_b_theta",
+                    "error": 0.003775177971127837
+                }
+            }
+        },
+        {
+            "mod": "K1830_pipi",
+            "amp": "u_b_l_pipi",
+            "prop": {
+                "prop_phi": {
+                    "name": "BW",
+                    "paras": [
+                        "phi_mass",
+                        "phi_width",
+                        "phi_pipi"
+                    ]
+                },
+                "prop_f": {
+                    "name": "BW",
+                    "paras": [
+                        "u_b_mass",
+                        "u_b_width",
+                        "b123_pipi"
+                    ]
+                }
+            },
+            "Sbc": {
+                "phi": "phi_pipi",
+                "b2": "b123_pipi"
+            },
+            "args": {
+                "phi_m": {
+                    "value": 1.02,
+                    "name": "phi_mass",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "phi_w": {
+                    "value": 0.004,
+                    "name": "phi_width",
+                    "fix": true,
+                    "error": 0.0
+                },
+                "pipi_K1830_m": {
+                    "value": 1.833891806023835,
+                    "range": [
+                        1.83,
+                        0.01
+                    ],
+                    "name": "pipi_u_b_mass",
+                    "error": 0.005188861852577167
+                },
+                "pipi_K1830_w": {
+                    "value": 0.32071140616916155,
+                    "range": [
+                        0.31,
+                        0.01
+                    ],
+                    "name": "pipi_u_b_width",
+                    "error": 0.006168664642136837
+                },
+                "pipi_K1830_c1": {
+                    "value": -0.09344540542076364,
+                    "name": "pipi_u_b_const",
+                    "error": 0.0028154723832329895
+                },
+                "pipi_K1830_c2": {
+                    "value": -0.043136472672836886,
+                    "name": "pipi_u_b_const",
+                    "error": 0.004116099097187444
+                },
+                "pipi_K1830_c3": {
+                    "value": -0.0007561936971118836,
+                    "name": "pipi_u_b_const",
+                    "error": 0.004227177255360261
+                },
+                "pipi_K1830_c4": {
+                    "value": 0.018874616088269645,
+                    "name": "pipi_u_b_const",
+                    "error": 0.002698150349157523
+                },
+                "pipi_K1830_t1": {
+                    "value": -0.010822687421108044,
+                    "name": "pipi_u_b_theta",
+                    "error": 0.0037176283216583984
+                },
+                "pipi_K1830_t2": {
+                    "value": -0.040722568342230044,
+                    "name": "pipi_u_b_theta",
+                    "error": 0.004982819930055716
+                },
+                "pipi_K1830_t3": {
+                    "value": -0.026196927067868466,
+                    "name": "pipi_u_b_theta",
+                    "error": 0.00443751922573855
+                },
+                "pipi_K1830_t4": {
+                    "value": -0.02641076251926599,
+                    "name": "pipi_u_b_theta",
+                    "error": 0.003775177971127837
                 }
             }
         }

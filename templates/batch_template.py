@@ -47,7 +47,8 @@ class submit(base_batch):
         self.generator_init(self.generator_dict)
         self.initial_prepare()
         self.read_pwa("fit")
-        self.cgpwa_dir = "/project/caihao5/sean/CGPWA/"
+        #self.cgpwa_dir = "/project/caihao5/sean/CGPWA/"
+        self.cgpwa_dir = "/project/caihao1/sunyc/cgpwa_kk/"
 
     def create(self, render_dict):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
@@ -207,11 +208,11 @@ class submit(base_batch):
     def pull(self,n,num):
         result_dir = f"output/fit/fit_result_{n}"
         scanX = 1.03
-        self.info["fit"]["lambda_tfc"] = 0.0
+        self.info["fit"]["lambda_tfc"] = 100
         self.info["fit"]["total_frac"]["kk"] = scanX
         self.info["fit"]["total_frac"]["pipi"] = scanX
         self.info["fit"]["Cycles"] = 1
-        self.info["fit"]["random"] = False
+        self.info["fit"]["random"] = True
         self.info["fit"]["use_weight"] = False
         self.jinja_fit_info["fit"]["CodeScript"] = "fit_object_{{generator_id}}_{}.py".format(n)
         self.jinja_fit_info["fit"]["RunScript"] = "fit_{{generator_id}}_{}.py".format(n)
@@ -244,8 +245,8 @@ class submit(base_batch):
             self.pull(n,i)
     
     def submit_pull(self):
-        epoch = 10
-        batch_size = 10
+        epoch = 15
+        batch_size = 20
         for i in range(epoch):
             result_dir = f"output/fit/fit_result_{i}"
             if not os.path.exists(result_dir):

@@ -1,53 +1,29 @@
 {
     "external_binding":
     {
-        "pipi_f1525_m":{"point":"kk_f1525_m","value":0},
-        "pipi_f1525_w":{"point":"kk_f1525_w","value":0},
-
-        "pipi_f980_m":{"point":"kk_f980_m","value":0}, 
-        "pipi_g_pipi":{"point":"kk_g_kk","value":0},
-        "pipi_rg":{"point":"kk_rg","value":0},
-
-        "pipi_f500_m":{"point":"kk_f500_m","value":0},
-        "pipi_f500_w":{"point":"kk_f500_w","value":0},
-
-        "pipi_f1370_m":{"point":"kk_f1370_m","value":0},
-        "pipi_f1370_w":{"point":"kk_f1370_w","value":0},
-
-        "pipi_f1500_m":{"point":"kk_f1500_m","value":0},
-        "pipi_f1500_w":{"point":"kk_f1500_w","value":0},
+        "kk_f980_m":{"point":"pipi_f980_m","value":0}, 
 
         "pipi_f1710_m":{"point":"kk_f1710_m","value":0},
         "pipi_f1710_w":{"point":"kk_f1710_w","value":0},
 
-        "pipi_f1270_m":{"point":"kk_f1270_m","value":0},
-        "pipi_f1270_w":{"point":"kk_f1270_w","value":0},
+        "pipi_f2340_m":{"point":"kk_f2340_m","value":0},
+        "pipi_f2340_w":{"point":"kk_f2340_w","value":0},
 
-        "pipi_f1430_m":{"point":"kk_f1430_m","value":0},
-        "pipi_f1430_w":{"point":"kk_f1430_w","value":0},
+        "kk_f2470_m":{"point":"pipi_f2470_m","value":0},
+        "kk_f2470_w":{"point":"pipi_f2470_w","value":0},
 
-        "pipi_f1565_m":{"point":"kk_f1565_m","value":0},
-        "pipi_f1565_w":{"point":"kk_f1565_w","value":0},
+        "kk_f2150_m":{"point":"pipi_f2150_m","value":0},
+        "kk_f2150_w":{"point":"pipi_f2150_w","value":0},
 
-        "pipi_f1640_m":{"point":"kk_f1640_m","value":0},
-        "pipi_f1640_w":{"point":"kk_f1640_w","value":0},
+        "kk_K1830_m":{"point":"pipi_K1830_m","value":0},
+        "kk_K1830_w":{"point":"pipi_K1830_w","value":0},
 
-        "pipi_f1810_m":{"point":"kk_f1810_m","value":0},
-        "pipi_f1810_w":{"point":"kk_f1810_w","value":0},
+        "pipi_f1525_m":{"point":"kk_f1525_m","value":0},
+        "pipi_f1525_w":{"point":"kk_f1525_w","value":0},
 
-        "pipi_f1910_m":{"point":"kk_f1910_m","value":0},
-        "pipi_f1910_w":{"point":"kk_f1910_w","value":0},
+        "kk_f1270_m":{"point":"pipi_f1270_m","value":0},
+        "kk_f1270_w":{"point":"pipi_f1270_w","value":0}
 
-        "pipi_f1950_m":{"point":"kk_f1950_m","value":0},
-        "pipi_f1950_w":{"point":"kk_f1950_w","value":0},
 
-        "pipi_f2010_m":{"point":"kk_f2010_m","value":0},
-        "pipi_f2010_w":{"point":"kk_f2010_w","value":0},
-
-        "pipi_f2150_m":{"point":"kk_f2150_m","value":0},
-        "pipi_f2150_w":{"point":"kk_f2150_w","value":0},
-
-        "pipi_f2300_m":{"point":"kk_f2300_m","value":0},
-        "pipi_f2300_w":{"point":"kk_f2300_w","value":0}
     }
 }

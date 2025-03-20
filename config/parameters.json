@@ -8,7 +8,7 @@
                 "total_gpu_id":[0,1],
                 "processes_gpus":2,
                 "max_processes":1,
-                "max_processes_memory":0.89,
+                "max_processes_memory":0.86,
                 "thread_gpus":1,
                 "threads_in_one_gpu":1
             },
@@ -23,7 +23,7 @@
         {
             "run_config":
             {
-                "total_gpu_id":[0,1,2,3],
+                "total_gpu_id":[0,1],
                 "processes_gpus":2,
                 "max_processes":1,
                 "max_processes_memory":0.89,
@@ -155,12 +155,12 @@
     {
         "pipi":
         {
-            "data":11016,
-            "mc":800000
+            "data":51276,
+            "mc":400000
         },
         "kk":
         {
-            "data":5865,
+            "data":27582,
             "mc":400000
         }
     }

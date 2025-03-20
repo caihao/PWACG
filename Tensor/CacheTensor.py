@@ -61,6 +61,8 @@ class CompoundDataForTensor(object):
         self.momentum_mass["f"] = self.invm(f)
         self.momentum_mass["b123"] = self.invm(b123)
         self.momentum_mass["b124"] = self.invm(b124)
+        self.momentum_mass["kst2_123"] = self.invm(b123)
+        self.momentum_mass["kst2_124"] = self.invm(b124)
         print(Kp.shape)
         # 切片四动量为了计算张量的时候不报错
         self._Kp = onp.array_split(Kp, num, axis=0)
@@ -84,7 +86,7 @@ class pwa_func():
     def __init__(self):
         self._dict = dict()
         self.output_num = None
-        self.classification_list = ["phif0","phif2","u_b_l","u_b_r","u_rho_l","u_rho_r"]
+        self.classification_list = ["phif0","phif2","u_b_l","u_b_r","u_rho_l","u_rho_r","u_kst0_l","u_kst0_r","u_kst2_l","u_kst2_r"]
         self.classification_dict = dict()
     
     def fill_func(self):
@@ -112,6 +114,13 @@ class pwa_func():
         self._dict["u_b_r_ds"] = [my_func.u_DS_2,5]
         self._dict["u_b_r_dd"] = [my_func.u_DD_2,5]
 
+        self._dict["u_kst0_l"] = [my_func.u_kst0_l,5]
+        self._dict["u_kst0_r"] = [my_func.u_kst0_r,5]
+
+        self._dict["u_kst2_l_12"] = [my_func.u_kst2_12_l,5]
+        self._dict["u_kst2_r_12"] = [my_func.u_kst2_12_r,5]
+        self._dict["u_kst2_l_32"] = [my_func.u_kst2_32_l,5]
+        self._dict["u_kst2_r_32"] = [my_func.u_kst2_32_r,5]
 
     def get_func(self,str):
         func = (self._dict[str])[0]
@@ -127,7 +136,7 @@ class pwa_func():
 
     def get_classification(self):
         for characters in self.classification_list:
-            self.classification_dict[characters] = list()
+            self.classification_dict[characters] = list()#遍历所有的振幅
 
         for characters in self.classification_list:
             for name in self._dict:
@@ -198,6 +207,7 @@ def Calculate(my_func, cdl):
     my_func.classification_info()
     for character_name in my_func.classification_dict:
         total_tensor = list()
+        # print(total_tensor)
         for func_name in my_func.classification_dict[character_name]: 
             print("run begain, run {} ".format(func_name))
             cdl.para_size = my_func.get_paras(func_name)

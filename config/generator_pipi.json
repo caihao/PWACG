@@ -119,16 +119,16 @@
         },
         "fit":
         {
-            "use_weight":false,
+            "use_weight":true,
             "write":true,
-            "Cycles":1,
+            "Cycles":50,
             "total_frac":
             {
-                "pipi":1.1
+                "pipi":1.15
             },
             "boundary":true,
-            "random":false,
-            "lambda_tfc":1e2
+            "random":true,
+            "lambda_tfc":5127600
         },
         "draw":
         {

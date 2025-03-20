@@ -12,4 +12,4 @@ module load singularity
 
 cd $SLURM_SUBMIT_DIR
 
-singularity exec --nv --bind /project/`whoami`,/scratch/`whoami` /scratch/caihao5/singularity/tensorflow.sif python3 {{run_file}}
+singularity exec --nv --bind /project/`whoami`,/scratch/`whoami` /scratch/caihao1/singularity/tensorflow.sif python3 {{run_file}}

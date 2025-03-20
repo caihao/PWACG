@@ -9,7 +9,7 @@ logger = logging.getLogger("draw")
 
 {{args()}}
 
-{% call ProcessInitializer(data_path="data/mc_truth",mc_path="data/mc_truth") %}
+{% call ProcessInitializer(data_path="data/draw_data",mc_path="data/mc_int") %}
 {% endcall %}
 
 {{ProcessReturns()}}

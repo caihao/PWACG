@@ -11,6 +11,18 @@
         temp = dplex.dconstruct(m_*m_ - Sbc,  -m_*w_*np.ones(l))
         return dplex.ddivide(k, temp)
 
+    def BW_phi(self,m_,w_,Sbc):
+        l = (Sbc.shape)[0]
+        M_K = 0.493677
+        q_0 = 0.197321
+
+        up = 1.0 + 4*q_0*q_0 / (Sbc*Sbc-4*M_K*M_K)
+        down = 1.0 + 4*q_0*q_0 / (m_*m_-4*M_K*M_K)
+        Gamma_phi = w_*m_ / Sbc * up / down
+
+        temp = dplex.dconstruct(m_*m_ - Sbc,  -m_*Gamma_phi*np.ones(l))
+        return dplex.ddivide(1.0, temp)
+
     def flatte980(self,m_,g_pipi,rg,Sbc):
         g_kk = rg * g_pipi
         m_k = 0.493677

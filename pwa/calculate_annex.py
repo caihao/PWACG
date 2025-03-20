@@ -146,7 +146,19 @@
     def {{func.prop_name}}(self, {{func["prop"]["prop_phi"]["paras"]|join(',')}},{{func["prop"]["prop_f"]["paras"]|join(',')}}):
         {%- if info.merge == 'phi' %}
         a = self.{{func.prop.prop_phi.name}}({{func["prop"]["prop_phi"]["paras"]|join(',')}})
+
+        {%- if func.Sbc.f == 'f_kk' or func.Sbc.f == 'f_pipi' %}
         b = np.moveaxis(vmap(partial(self.{{func.prop.prop_f.name}},Sbc={{func.Sbc.f}}))({{func["prop"]["prop_f"]["_paras"]|join(',')}}),1,0)
+        {%- endif %}
+
+        {%- if func.Sbc.f == 'b123_pipi' or func.Sbc.f == 'b123_kk'%}
+        b = np.moveaxis(vmap(partial(self.{{func.prop.prop_f.name}},Sbc={{func.Sbc.b1}}))({{func["prop"]["prop_f"]["_paras"]|join(',')}}),1,0)
+        {%- endif %}
+
+        {%- if func.Sbc.kst2_1 == 'kst2_124_kk'%}
+        b = np.moveaxis(vmap(partial(self.{{func.prop.prop_f.name}},Sbc={{func.Sbc.kst2_1}}))({{func["prop"]["prop_f"]["_paras"]|join(',')}}),1,0)
+        {%- endif %}
+
         return dplex.deinsum("j, ij->ij",a,b)
         {%- endif %}
 

@@ -11,7 +11,7 @@ import BASE as base
 
 class FUNCTION(object):
     def __init__(self):
-        # defind the four momentum of \psi(2s)
+        # defind the four momentum of \psi(2s)静止系
         self.psi2s = np.array([0.0,0.0,0.0,3.686])
         # self.psi2s = np.array([0.0405,0,0,3.686])
     
@@ -35,6 +35,14 @@ class FUNCTION(object):
         self.u_DS_2 = jit(vmap(self._u_DS_2))
         self.u_DD_1 = jit(vmap(self._u_DD_1))
         self.u_DD_2 = jit(vmap(self._u_DD_2))
+
+        self.u_kst0_l = jit(vmap(self._u_kst0_l))
+        self.u_kst0_r = jit(vmap(self._u_kst0_r))
+
+        self.u_kst2_12_l = jit(vmap(self._u_kst2_12_l))
+        self.u_kst2_12_r = jit(vmap(self._u_kst2_12_r))
+        self.u_kst2_32_l = jit(vmap(self._u_kst2_32_l))
+        self.u_kst2_32_r = jit(vmap(self._u_kst2_32_r))
 
     # Eq.(36)
     # <\phi f_0 | 01>
@@ -247,7 +255,105 @@ class FUNCTION(object):
         b1_3 = np.einsum("ij,jk,k->i",t2_con,_t2_cov,t1_con)
 
         return b1_3
+    
+    # Eq.(75)
+    # <KK_0|10>
+    def _u_kst0_r(self,phi,Kp,Km,Pip,Pim):#上标逆变，下标协变
+        G = base.metric()
 
+        kst0 = Kp + Km + Pip
+        T1_cov = base.T1_cov(self.psi2s,kst0,Pim)
+        T1_con = np.einsum("i,ij->j",T1_cov,G)
+        t1_phi3_cov = base.T1_cov(kst0,phi,Pip)
+        t1_phi3_con = np.einsum("i,ij->j",t1_phi3_cov,G)
+        t1_12_cov = base.T1_cov(phi,Kp,Km)
+        amp123 = np.einsum("i,j,j->i",T1_con,t1_phi3_con,t1_12_cov)
+
+        return amp123
+
+    def _u_kst0_l(self,phi,Kp,Km,Pip,Pim):# 两个振幅是相减，应该加一个负号下边同理，这里有一个问题是负号是不是可以被系数吸收
+        G = base.metric()
+
+        kst0 = Kp + Km + Pim
+        T1_cov = base.T1_cov(self.psi2s,kst0,Pip)
+        T1_con = np.einsum("i,ij->j",T1_cov,G)
+        t1_phi4_cov = base.T1_cov(kst0,phi,Pim)
+        t1_phi4_con = np.einsum("i,ij->j",t1_phi4_cov,G)
+        t1_12_cov = base.T1_cov(phi,Kp,Km)
+        amp124 = np.einsum("i,j,j->i",T1_con,t1_phi4_con,t1_12_cov)
+
+        return -1*amp124
+    
+    #Eq.(72)
+    #<KK_2|12>
+    def _u_kst2_12_r(self,phi,Kp,Km,Pip,Pim):
+        G = base.metric()
+
+        kst2 = Kp + Km + Pip
+        m23 = Km + Pip
+        p2_123_cov = base.P2(kst2)
+        p2_123_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2_123_cov,G,G,G,G)
+        T1_cov = base.T1_cov(self.psi2s,kst2,Pim)
+        p2_23_cov = base.P2(m23)
+        t1_phi3_cov = base.T1_cov(kst2,phi,Pip)
+        t1_phi3_con = np.einsum("i,ij->j",t1_phi3_cov,G)
+        t1_12_cov = base.T1_cov(phi,Kp,Km)
+        t1_12_con = np.einsum("i,ij->j",t1_12_cov,G)
+        amp123 = np.einsum("ijkl,j,klmn,m,n->i",p2_123_con,T1_cov,p2_23_cov,t1_phi3_con,t1_12_con)
+
+        return amp123
+
+    def _u_kst2_12_l(self,phi,Kp,Km,Pip,Pim):
+        G = base.metric()
+
+        kst2 = Kp + Km + Pim
+        m14 = Kp + Pim
+        p2_124_cov = base.P2(kst2)
+        p2_124_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2_124_cov,G,G,G,G)
+        T1_cov = base.T1_cov(self.psi2s,kst2,Pip)
+        p2_14_cov = base.P2(m14)
+        t1_phi4_cov = base.T1_cov(kst2,phi,Pim)
+        t1_phi4_con = np.einsum("i,ij->j",t1_phi4_cov,G)
+        t1_12_cov = base.T1_cov(phi,Kp,Km)
+        t1_12_con = np.einsum("i,ij->j",t1_12_cov,G)
+        amp124 = np.einsum("ijkl,j,klmn,m,n->i",p2_124_con,T1_cov,p2_14_cov,t1_phi4_con,t1_12_con)
+
+        return -1*amp124
+
+    #eq.(73)
+    #<KK_2|32>
+    def _u_kst2_32_r(self,phi,Kp,Km,Pip,Pim):
+        G = base.metric()
+
+        kst2 = Kp + Km + Pip
+        m23 = Km + Pip
+        T3_cov = base.T3_cov(self.psi2s,kst2,Pim)
+        T3_con = np.einsum("ijk,im,jn,ko->mno",T3_cov,G,G,G)
+        p2_123_cov = base.P2(kst2)
+        p2_23_cov = base.P2(m23)
+        p2_23_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2_23_cov,G,G,G,G)
+        t1_phi3_cov = base.T1_cov(kst2,phi,Pip)
+        t1_12_cov = base.T1_cov(phi,Kp,Km)
+
+        amp123 = np.einsum("ijk,jklm,lmop,o,p->i",T3_con,p2_123_cov,p2_23_con,t1_phi3_cov,t1_12_cov)
+
+        return amp123
+
+    def _u_kst2_32_l(self,phi,Kp,Km,Pip,Pim):
+        G = base.metric()
+
+        kst2 = Kp + Km + Pim
+        m14 = Kp + Pim
+        T3_cov = base.T3_cov(self.psi2s,kst2,Pip)
+        T3_con = np.einsum("ijk,im,jn,ko->mno",T3_cov,G,G,G)
+        p2_124_cov = base.P2(kst2)
+        p2_14_cov = base.P2(m14)
+        p2_14_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2_14_cov,G,G,G,G)
+        t1_phi4_cov = base.T1_cov(kst2,phi,Pim)
+        t1_12_cov = base.T1_cov(phi,Kp,Km)
+        amp124 = np.einsum("ijk,jklm,lmop,o,p->i",T3_con,p2_124_cov,p2_14_con,t1_phi4_cov,t1_12_cov)
+
+        return -1*amp124
 
 if __name__ == "__main__":
     G = base.metric()

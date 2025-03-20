@@ -9,7 +9,7 @@ logger = logging.getLogger("draw")
 
 {{args()}}
 
-{% call ProcessInitializer(data_path="data/mc_truth",mc_path="data/mc_truth") %}
+{% call ProcessInitializer(data_path="data/draw_data",mc_path="data/mc_int") %}
 {% endcall %}
 
 {{ProcessReturns()}}
@@ -63,7 +63,6 @@ logger = logging.getLogger("draw")
         total_weight["fit_value"] = values
         ferror = ["{{error_list|join('\",\"')}}"]
         total_weight["fit_error"] = ferror
-        total_weight["sum_wt"] = self.sum_wt
         if mode == "pass":
             onp.savez("{{draw_result_file}}", **total_weight)
         if mode == "truth":
@@ -76,8 +75,8 @@ logger = logging.getLogger("draw")
 {% call Control(jinja_draw_info.draw_wt.ResultFile) %}
         pwaf = self.pwaf_list[0][0]
         fvalue, ferror, sof = pwaf.run_weight(self.args_list, self.float_list,mode="pass")
-        fvalue, ferror, sof = pwaf.run_weight(self.args_list, self.float_list,mode="truth")
         self.save_in_json(fvalue,ferror,"output/error",str(0))
+        fvalue, ferror, sof = pwaf.run_weight(self.args_list, self.float_list,mode="truth")
         sof = onp.array(sof)
         fvalue = onp.array(fvalue)
         min_fcn = [sof]

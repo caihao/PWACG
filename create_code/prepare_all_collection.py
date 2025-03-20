@@ -63,6 +63,7 @@ class Prepare_All():
         calculate_func_coll = list()
         for mod in self.mod_info:
             mod.update(calculate_func = "{}_{}_{}".format(mod["amp"],mod["prop"]["prop_phi"]["name"],mod["prop"]["prop_f"]["name"]))
+            # 振幅名字，phi传播子名字，f传播子名字，作为计算函数名字
             mod.update(prop_name = "{}_{}".format(mod["prop"]["prop_phi"]["name"],mod["prop"]["prop_f"]["name"]))
             calculate_func_coll.append(mod["calculate_func"])
         self.calculate_func_coll = sorted(set(calculate_func_coll),key=calculate_func_coll.index)
@@ -199,7 +200,7 @@ class Prepare_All():
         self.render_dict.update(sbc_collection = self.sbc_collection)
         self.render_dict.update(amp_collection = self.amp_collection)
         # print(self.data_collection)
-        # print(self.amp_collection
+        # print(self.amp_collection)
     
     def get_args_array(self):
         def flat(nums):
@@ -368,14 +369,14 @@ class Prepare_All():
                 if i in self.float_index:
                     if str(i) in self.range_dict:
                         # 边界条件代码
-                        trans_temp.append("np.power({0}-args[{2}],2)*{1}".format(self.range_dict[str(i)][0],self.range_dict[str(i)][1],self.float_index.index(i)))
+                        trans_temp.append("np.power({0}-args[{2}],2)/np.power({1},2)/2.0".format(self.range_dict[str(i)][0],self.range_dict[str(i)][1],self.float_index.index(i)))
 
                     temp.append("args[{}]".format(self.float_index.index(i)))
                 elif i in self.binding_point["goto0"]:
                     wz = self.binding_point["goto0"].index(i)
                     igo = self.binding_point["goto1"][wz]
                     if str(igo) in self.range_dict:
-                        trans_temp.append("np.power({0}-args[{2}],2)*{1}".format(self.range_dict[str(igo)][0],self.range_dict[str(igo)][1],self.float_index.index(igo)))
+                        trans_temp.append("np.power({0}-args[{2}],2)/np.power({1},2)/2.0".format(self.range_dict[str(igo)][0],self.range_dict[str(igo)][1],self.float_index.index(igo)))
 
                     # goto0 和 goto1 都 fix 的时候不能binding
                     if self.binding_point["goto1"][wz] in self.float_index:
@@ -384,7 +385,7 @@ class Prepare_All():
                         temp.append(str(self.args_list_complete[i]))
                 else:
                     if str(i) in self.range_dict:
-                        trans_temp.append("np.power({0}-args[{2}],2)*{1}".format(self.range_dict[str(i)][0],self.range_dict[str(i)][1],self.args_list_complete(i)))
+                        trans_temp.append("np.power({0}-args[{2}],2)/np.power({1},2)/2.0".format(self.range_dict[str(i)][0],self.range_dict[str(i)][1],self.args_list_complete(i)))
 
                     temp.append(str(self.args_list_complete[i]))
             temp = ",".join(temp)
@@ -488,37 +489,22 @@ class Prepare_All():
         self.mc_return_dict = dict()
         self.weight_return_dict = dict()
         self.wt_data_return_dict = dict()
-        #data
-        multiplier = 2.0
-        for tag in self.info["combine"]["tag"]:
-            if self.info["fit"]["use_weight"]:
-                data_size = float(onp.sum(onp.load("data/weight/weight_{}.npy".format(tag))))
-                self.data_return_dict[tag] = "return -np.sum(np.log(np.sum(dplex.dabs({}),axis=1))) + {}*step_function".format(self.combine_data_add_all_amp[tag],data_size)
-                # self.data_return_dict[tag] = "return (-np.sum(np.log(np.sum(dplex.dabs({0}),axis=1)))+{2}*{1})*(1.0 + step_function)".format(self.combine_data_add_all_amp[tag],data_size,multiplier)
-            else:
-                if re.match(".*"+tag, " ".join(self.sbc_collection)):
-                    data_size = float(onp.load("data/real_data/{}.npy".format([sbc for sbc in self.sbc_collection if re.match(".*"+tag,sbc)][0])).shape[0])
-                    self.data_return_dict[tag] = "return -np.sum(np.log(np.sum(dplex.dabs({}),axis=1))) + {}*step_function".format(self.combine_data_add_all_amp[tag],data_size)
-                    # self.data_return_dict[tag] = "return (-np.sum(np.log(np.sum(dplex.dabs({0}),axis=1)))+{2}*{1})*(1.0 + step_function)".format(self.combine_data_add_all_amp[tag],data_size,multiplier)
-                else:
-                    data_size = 0
-                    self.data_return_dict[tag] = "return -np.sum(np.log(np.sum(dplex.dabs({}),axis=1))) + {}*step_function".format(self.combine_data_add_all_amp[tag],data_size)
-                    # self.data_return_dict[tag] = "return (-np.sum(np.log(np.sum(dplex.dabs({0}),axis=1)))+{2}*{1})*(1.0 + step_function)".format(self.combine_data_add_all_amp[tag],data_size,multiplier)
 
         for tag in self.info["combine"]["tag"]:
-            if self.info["fit"]["use_weight"]:
-                data_size = float(onp.sum(onp.load("data/weight/weight_{}.npy".format(tag))))
-                self.wt_data_return_dict[tag] = "return -np.sum(self.wt_data_{1}*np.log(np.sum(dplex.dabs({0}),axis=1))) + {2}*step_function".format(self.combine_data_add_all_amp[tag],tag,data_size)
-                # self.wt_data_return_dict[tag] = "return (-np.sum(self.wt_data_{1}*np.log(np.sum(dplex.dabs({0}),axis=1)))+{3}*{2})*(1.0 + step_function)".format(self.combine_data_add_all_amp[tag],tag,data_size,multiplier)
+            if re.match(".*"+tag, " ".join(self.sbc_collection)):
+                data_size = float(onp.load("data/real_data/{}.npy".format([sbc for sbc in self.sbc_collection if re.match(".*"+tag,sbc)][0])).shape[0])
+                self.data_return_dict[tag] = "return -np.sum(np.log(np.sum(dplex.dabs({}),axis=1))) + step_function".format(self.combine_data_add_all_amp[tag])
             else:
-                if re.match(".*"+tag," ".join(self.sbc_collection)):
-                    data_size = float(onp.load("data/real_data/{}.npy".format([sbc for sbc in self.sbc_collection if re.match(".*"+tag,sbc)][0])).shape[0])
-                    self.wt_data_return_dict[tag] = "return -np.sum(self.wt_data_{1}*np.log(np.sum(dplex.dabs({0}),axis=1))) + {2}*step_function".format(self.combine_data_add_all_amp[tag],tag,data_size)
-                    # self.wt_data_return_dict[tag] = "return (-np.sum(self.wt_data_{1}*np.log(np.sum(dplex.dabs({0}),axis=1)))+{3}*{2})*(1.0 + step_function)".format(self.combine_data_add_all_amp[tag],tag,data_size,multiplier)
-                else:
-                    data_size = 0
-                    self.wt_data_return_dict[tag] = "return -np.sum(self.wt_data_{1}*np.log(np.sum(dplex.dabs({0}),axis=1))) + {2}*step_function".format(self.combine_data_add_all_amp[tag],tag,data_size)
-                    # self.wt_data_return_dict[tag] = "return (-np.sum(self.wt_data_{1}*np.log(np.sum(dplex.dabs({0}),axis=1)))+{3}*{2})*(1.0 + step_function)".format(self.combine_data_add_all_amp[tag],tag,data_size,multiplier)
+                data_size = 0
+                self.data_return_dict[tag] = "return -np.sum(np.log(np.sum(dplex.dabs({}),axis=1))) + step_function".format(self.combine_data_add_all_amp[tag])
+
+        for tag in self.info["combine"]["tag"]:
+            if re.match(".*"+tag," ".join(self.sbc_collection)):
+                data_size = float(onp.load("data/real_data/{}.npy".format([sbc for sbc in self.sbc_collection if re.match(".*"+tag,sbc)][0])).shape[0])
+                self.wt_data_return_dict[tag] = "return -np.sum(self.wt_data_{1}*np.log(np.sum(dplex.dabs({0}),axis=1))) + step_function".format(self.combine_data_add_all_amp[tag],tag)
+            else:
+                data_size = 0
+                self.wt_data_return_dict[tag] = "return -np.sum(self.wt_data_{1}*np.log(np.sum(dplex.dabs({0}),axis=1))) + step_function".format(self.combine_data_add_all_amp[tag],tag)
 
         for tag in self.info["combine"]["tag"]:
             self.lasso_data_return_dict[tag] = "return -np.sum(np.log(np.sum(dplex.dabs({0}),axis=1))) + np.power(10,{2})*({1})".format(self.combine_data_add_all_amp[tag], self.combine_lasso_data_add_all_amp[tag], self.info["fit"]["lambda_tfc"])
@@ -584,10 +570,9 @@ class Prepare_All():
 
             smooth_add_frac = "np.power({}-{},2.0)".format("+".join(["np.sum(np.einsum(\"ljk->l\",dplex.dabs({0}))/sum_frac)".format(amp) for amp in temp_frac]), self.info["fit"]["total_frac"][tag])
 
-            step_function = "step_function = (" + "{0})*{1}".format(smooth_add_frac, self.info["fit"]["lambda_tfc"]) + " + " + Param_limits
+            step_function = "step_function = (" + "{0})*{1} ".format(smooth_add_frac, self.info["fit"]["lambda_tfc"]) + " + " + Param_limits
 
-
-            bounding[tag] = sum_frac + "\n        " + step_function
+            bounding[tag] = sum_frac + "\n        " + step_function 
 
             # save mc weight
             total_wt = "total_wt = " + "np.sum(dplex.dabs({}),axis=1)".format("+".join(["np.einsum(\"mljk->mjk\", {})".format(l) for l in self.lasso_frac[tag]]))
@@ -614,8 +599,7 @@ class Prepare_All():
                 temp.update(data_size = float(onp.sum(onp.load("data/weight/weight_{}.npy".format(tag)))))
             else:
                 temp.update(data_size = float(onp.load("data/real_data/{}.npy".format([sbc for sbc in self.sbc_collection if re.match(".*"+tag,sbc)][0])).shape[0]))
-            temp.update(mc_size = float(onp.load("data/mc_truth/{}.npy".format([sbc for sbc in self.sbc_collection if re.match(".*"+tag,sbc)][0])).shape[0]))
-            # temp.update(mc_size = float(self.CacheTensor[tag]["mc"]))
+            temp.update(mc_size = float(self.CacheTensor[tag]["mc"]))
             lh_collection.append(temp)
         self.render_dict.update(lh_coll = lh_collection)
 
