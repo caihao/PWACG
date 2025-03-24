@@ -185,6 +185,10 @@ def PlotDataMC(filename,  # Name for the output files, without extension
 
     c1 = TCanvas("bes3plots","BESIII Plots", 1200,900)
 
+    y_max = max([hist.GetMaximum() for hist in hist_list])  # 找到所有直方图的最大值
+    for hist in hist_list:
+        hist.GetYaxis().SetRangeUser(0, y_max * 1.1)  # 统一设置 Y 轴范围
+
     FormatData(hist_list[0])
     FormatMC2(hist_list[1])
     for i in range(2,len(hist_list)):
