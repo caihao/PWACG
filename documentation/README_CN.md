@@ -81,6 +81,9 @@ $ ls data
 draw_data  draw_mc  mc_int  mc_truth  real_data  weight
 ```
 
+解压后的 data 目录应位于项目的根目录下。确保程序能够正确读取并使用 data 目录中的数据。
+
+
 ### 2. 生成分析脚本
 
 使用以下命令生成所需的分析脚本：

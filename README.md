@@ -81,6 +81,8 @@ $ ls data
 draw_data  draw_mc  mc_int  mc_truth  real_data  weight
 ```
 
+The extracted `data` directory should be located in the root directory of the project. Make sure the program can correctly read and use the data in the `data` directory.
+
 ### 2. Generate Analysis Scripts
 
 Use the following command to generate the required analysis scripts:
