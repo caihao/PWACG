@@ -58,7 +58,7 @@ pip install -U \
 
 ## Quick Start
 
-Before using PWACG, ensure that you have all the necessary data and configuration files ready.
+Before starting to use PWACG, make sure you have all the necessary data and configuration files prepared, and that you have switched to the `main` branch in Git.
 
 ### 1. Download Demo Data
 
