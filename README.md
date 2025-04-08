@@ -1,44 +1,87 @@
 # PWACG - Partial Wave Analysis Code Generator
 [Readme 中文版](documentation/README_CN.md)
 
-PWACG (Partial Wave Analysis Code Generator) is a code generation tool designed specifically for partial wave analysis. Utilizing advanced code generation techniques, it can produce analysis code with extremely fast computation speed and high memory utilization efficiency. This tool supports using the Newton conjugate gradient method for optimization in large-scale data, significantly improving the efficiency of searching for the global optimal solution in partial wave analysis fitting.
+PWACG (Partial Wave Analysis Code Generator) is a code generation tool specifically designed for partial wave analysis. It uses advanced code generation techniques to produce highly efficient analysis code with fast computation speeds and optimized memory usage. This tool supports the use of the Newton conjugate gradient method for optimization in large datasets, significantly improving the efficiency of searching for global optimal points in partial wave analysis fitting.
 
-## Features
+## Installation and Environment Setup
 
-- **Blazing Fast Computation**: Significantly boosts computation speed by optimizing execution paths through code generation techniques.
-- **Efficient Memory Utilization**: Intelligently manages memory resources to ensure efficient utilization, suitable for processing large-scale datasets.
-- **Newton Conjugate Gradient Optimization**: Supports using the efficient Newton conjugate gradient method for optimization in large-scale data, improving the efficiency of searching for the global optimal solution.
-- **Suitable for Large-Scale Data Analysis**: Particularly suitable for partial wave analysis tasks that require processing and analyzing large amounts of data.
-
-## Installation
-
-### Obtaining the Installation Package
-
-First, you need to clone the PWACG repository from GitHub to your local machine:
+### 1. Get the Installation Package
+First, clone the PWACG repository from GitHub to your local machine:
 
 ```bash
-git clone git@github.com:caihao/PWACG.git
+git clone https://github.com/caihao/PWACG.git
 ```
 
-This will create a folder named `PWACG` in the current directory, containing all the necessary files.
+This will create a folder named `PWACG` in the current directory containing all the necessary files.
 
-### Installing Dependencies with pip
+### 2. Install Miniconda
+Please download and install Miniconda based on your operating system from the [Miniconda Official Website](https://www.anaconda.com/docs/getting-started/miniconda/main).
 
-Before installing PWACG, please ensure that you have installed JAX and all its necessary dependencies according to the requirements of [JAX](https://github.com/google/jax). Use the following command to install the minimum set of dependencies:
+### 3. Install JAX
+JAX has been tested on NVIDIA 30 series and the latest GPUs, requiring an already installed CUDA environment and NVIDIA drivers. Please verify that GPU support is working after installing JAX.
+
+Install JAX according to the CUDA version:
 
 ```bash
-pip install -r requirements-min.txt
+# For CUDA 12.x
+pip install -U "jax[cuda12]"
 ```
 
-This will read the necessary dependencies from the `requirements-min.txt` file and install them via pip.
+**Verify GPU support for JAX:**
 
-Make sure your Python environment meets the installation requirements of JAX, especially compatibility with CUDA and GPU, to fully leverage the performance advantages of PWACG.
+```bash
+python -c "import jax; print(jax.devices())"
+```
+
+**JAX official installation guide:** [JAX Installation Guide](https://github.com/jax-ml/jax?tab=readme-ov-file#installation)
+
+### 4. Install ROOT
+Install the ROOT data analysis framework using conda:
+
+```bash
+conda config --set channel_priority strict
+conda install -c conda-forge root
+```
+
+### 5. Install Python Dependencies
+Install the remaining Python dependencies:
+
+```bash
+pip install -U \
+    jinja2 \
+    iminuit \
+    pynvml \
+    matplotlib \
+    pandas \
+    tabulate
+```
 
 ## Quick Start
 
-Before starting to use PWACG, please ensure that you have prepared all the necessary data and configuration files.
+Before using PWACG, ensure that you have all the necessary data and configuration files ready.
 
-### Generate Analysis Scripts
+### 1. Download Demo Data
+
+Download the `data.zip` data file from the GitHub Releases:
+
+```bash
+wget https://github.com/caihao/PWACG/releases/download/v1.0.0/data.zip
+```
+
+Extract the data:
+
+```bash
+unzip data.zip
+```
+
+The extracted directory will look like this:
+
+```bash
+$ ls data
+draw_data  draw_mc  mc_int  mc_truth  real_data  weight
+```
+
+### 2. Generate Analysis Scripts
 
 Use the following command to generate the required analysis scripts:
 
@@ -46,74 +89,60 @@ Use the following command to generate the required analysis scripts:
 python create_all_scripts.py
 ```
 
-This command will create a series of scripts based on the data and configuration information you provided, which will be used in the subsequent partial wave analysis process.
+This command will create a series of scripts based on the provided data and configuration, which are needed for the partial wave analysis process.
 
-### Run the Fitting Demo
-To run the fitting demo, first download the data from the releases. Unzip the data into the `data` directory. If the directory doesn't exist, create it as follows:
+### 3. Run the Fitting Demo
 
-```bash
-# Create the data directory (if it doesn't exist)
-$ mkdir data
-# Unzip the data into the data directory
-$ unzip data/data.zip -d data
-```
-
-After unzipping, the directory structure should look like this:
+After generating the scripts, you can run the fitting process:
 
 ```bash
-$ ls data          
-draw_data  draw_mc  mc_int  mc_truth  real_data  weight
-```
-
-Once the scripts are generated, you can start the fitting process with the following commands:
-
-```bash
-# Generate the script for the fitting data
+# Generate fitting scripts
 $ python create_all_scripts.py
+
 # Run the fitting
 $ python run/fit_kk.py
 ```
 
-This will execute the `fit_kk.py` script and begin the partial wave analysis fitting process on your data. Depending on the volume of data and the configuration, this process may take some time.
+This will run the `fit_kk.py` script to begin fitting your data using partial wave analysis. The process may take some time depending on the data size and configuration.
 
-### Plotting the Fitting Results
-To plot the fitting results, generate the plotting scripts and produce the weights, then execute the plotting script as follows:
+### 4. Plot the Results
+
+After the fitting is complete, you can generate and view the fitting results in graphical form:
 
 ```bash
-# Generate the script for plotting the fitting results
+# Generate plotting scripts for the fitting results
 $ python create_all_scripts.py
-# Generate the weights for the fitting results
+
+# Generate the fitting result weights
 $ python run/draw_wt_kk.py
+
 # Plot the results
 $ python run/dplot_run_kk.py
 ```
 
-The resulting plots will be saved in the `output/pictures/partial_mods_pictures` directory.
+The plotted results will be saved in the `output/pictures/partial_mods_pictures/` directory.
 
-### Calculate the Covariant Tensor of the Angular Distribution
-To compute the covariant tensor of the angular distribution from the `Momentum_kk.npz` file in each directory of the input data, you can generate and run the necessary scripts as follows:
+## Project Highlights
 
-```bash
-# Generate the scripts
-$ python create_all_scripts.py
-# Run the calculation
-$ python run/RunCacheTensor.py
-```
+- **Fast Computation**: The tool utilizes code generation techniques to optimize the execution paths of algorithms, significantly improving computation speed.
+- **Efficient Memory Usage**: Smart memory management ensures high memory efficiency, suitable for handling large-scale datasets.
+- **Newton Conjugate Gradient Optimization**: Supports large datasets with efficient Newton conjugate gradient optimization, enhancing the search for global optimal solutions.
+- **Suitable for Large-Scale Data Analysis**: Especially designed for partial wave analysis tasks that involve handling and analyzing large volumes of data.
 
 ## Documentation
 
-For more detailed usage instructions and API documentation, please visit [Documentation Link](documentation/Tutorial_EN.md).
+For more detailed usage instructions and API documentation, please visit the [Documentation Link](Tutorial_CN.md).
 
 ## Contributing
 
-Any form of contribution is welcome, including but not limited to new features, bug fixes, documentation improvements, etc. Please share your ideas with us through Pull Requests or Issues.
+We welcome contributions in various forms, including but not limited to new features, bug fixes, and documentation improvements. Please share your ideas with us through Pull Requests or Issues.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE). Please refer to the included license file for more details.
+This project is licensed under the [MIT License](LICENSE). Please refer to the accompanying LICENSE file for details.
 
 ## Contact
 
-If you have any questions or suggestions, please feel free to contact us via the following channels:
+If you have any questions or suggestions, please contact us via the following channels:
 
 - GitHub Issues: https://github.com/caihao/PWACG/issues
