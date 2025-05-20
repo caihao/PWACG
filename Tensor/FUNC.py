@@ -36,13 +36,17 @@ class FUNCTION(object):
         self.u_DD_1 = jit(vmap(self._u_DD_1))
         self.u_DD_2 = jit(vmap(self._u_DD_2))
 
+        self.u_PP_1 = jit(vmap(self._u_PP_l))
+        self.u_PP_2 = jit(vmap(self._u_PP_r))
+        self.u_PF_1 = jit(vmap(self._u_PF_l))
+        self.u_PF_2 = jit(vmap(self._u_PF_r))
+        self.u_FP_1 = jit(vmap(self._u_FP_l))
+        self.u_FP_2 = jit(vmap(self._u_FP_r))
+        self.u_FF_1 = jit(vmap(self._u_FF_l))
+        self.u_FF_2 = jit(vmap(self._u_FF_r))
+
         self.u_kst0_l = jit(vmap(self._u_kst0_l))
         self.u_kst0_r = jit(vmap(self._u_kst0_r))
-
-        self.u_kst2_12_l = jit(vmap(self._u_kst2_12_l))
-        self.u_kst2_12_r = jit(vmap(self._u_kst2_12_r))
-        self.u_kst2_32_l = jit(vmap(self._u_kst2_32_l))
-        self.u_kst2_32_r = jit(vmap(self._u_kst2_32_r))
 
     # Eq.(36)
     # <\phi f_0 | 01>
@@ -271,7 +275,7 @@ class FUNCTION(object):
 
         return amp123
 
-    def _u_kst0_l(self,phi,Kp,Km,Pip,Pim):# 两个振幅是相减，应该加一个负号下边同理，这里有一个问题是负号是不是可以被系数吸收
+    def _u_kst0_l(self,phi,Kp,Km,Pip,Pim):
         G = base.metric()
 
         kst0 = Kp + Km + Pim
@@ -282,78 +286,119 @@ class FUNCTION(object):
         t1_12_cov = base.T1_cov(phi,Kp,Km)
         amp124 = np.einsum("i,j,j->i",T1_con,t1_phi4_con,t1_12_cov)
 
-        return -1*amp124
+        return amp124
     
-    #Eq.(72)
-    #<KK_2|12>
-    def _u_kst2_12_r(self,phi,Kp,Km,Pip,Pim):
+   # KK_2 PP
+    def _u_PP_r(self,phi,Kp,Km,Pip,Pim):
         G = base.metric()
-
         kst2 = Kp + Km + Pip
-        m23 = Km + Pip
-        p2_123_cov = base.P2(kst2)
-        p2_123_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2_123_cov,G,G,G,G)
+        p2psi_cov = base.P2(self.psi2s)
+        p2psi_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2psi_cov,G,G,G,G)
+        Gt_ks_cov = base.Gt_cov(kst2)
         T1_cov = base.T1_cov(self.psi2s,kst2,Pim)
-        p2_23_cov = base.P2(m23)
+        t1_phi3_cov = base.T1_cov(kst2,phi,Pip)
+        t1_12_cov = base.T1_cov(phi,Kp,Km)
+        t1_12_con = np.einsum("i,ij->j",t1_12_cov,G)
+        amp123 = np.einsum("ijkl,j,k,lm,m->i",p2psi_con,T1_cov,t1_phi3_cov,Gt_ks_cov,t1_12_con)
+        return amp123
+    
+    def _u_PP_l(self,phi,Kp,Km,Pip,Pim):
+        G = base.metric()
+        kst2 = Kp + Km + Pim
+        p2psi_cov = base.P2(self.psi2s)
+        p2psi_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2psi_cov,G,G,G,G)
+        Gt_ks_cov = base.Gt_cov(kst2)
+        T1_cov = base.T1_cov(self.psi2s,kst2,Pip)
+        t1_phi4_cov = base.T1_cov(kst2,phi,Pim)
+        t1_12_cov = base.T1_cov(phi,Kp,Km)
+        t1_12_con = np.einsum("i,ij->j",t1_12_cov,G)
+        amp124 = np.einsum("ijkl,j,k,lm,m->i",p2psi_con,T1_cov,t1_phi4_cov,Gt_ks_cov,t1_12_con)
+        return amp124
+
+    #KK_2 PF
+    def _u_PF_r(self,phi,Kp,Km,Pip,Pim):
+        G = base.metric()
+        kst2 = Kp + Km + Pip
+        p2psi_cov = base.P2(self.psi2s)
+        p2psi_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2psi_cov,G,G,G,G)
+        Gt_ks_cov = base.Gt_cov(kst2)
+        Gt_ks_con = np.einsum("ij,ik,jl->kl",Gt_ks_cov,G,G)
+        T1_cov = base.T1_cov(self.psi2s,kst2,Pim)
+        t3_phi3_cov = base.T3_cov(kst2,phi,Pip)
+        t1_12_cov = base.T1_cov(phi,Kp,Km)
+        amp123 = np.einsum("ijkl,j,klm,mn,n->i",p2psi_con,T1_cov,t3_phi3_cov,Gt_ks_con,t1_12_cov)
+        return amp123
+
+    def _u_PF_l(self,phi,Kp,Km,Pip,Pim):
+        G = base.metric()
+        kst2 = Kp + Km + Pim
+        p2psi_cov = base.P2(self.psi2s)
+        p2psi_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2psi_cov,G,G,G,G)
+        Gt_ks_cov = base.Gt_cov(kst2)
+        Gt_ks_con = np.einsum("ij,ik,jl->kl",Gt_ks_cov,G,G)
+        T1_cov = base.T1_cov(self.psi2s,kst2,Pip)
+        t3_phi4_cov = base.T3_cov(kst2,phi,Pim)
+        t1_12_cov = base.T1_cov(phi,Kp,Km)
+        amp124 = np.einsum("ijkl,j,klm,mn,n->i",p2psi_con,T1_cov,t3_phi4_cov,Gt_ks_con,t1_12_cov)
+        return amp124
+    
+    #KK_2 FP
+    def _u_FP_r(self,phi,Kp,Km,Pip,Pim):
+        G = base.metric()
+        kst2 = Kp + Km + Pip
+        p2psi_cov = base.P2(self.psi2s)
+        Gt_ks_cov = base.Gt_cov(kst2)
+        Gt_ks_con = np.einsum("ij,ik,jl->kl",Gt_ks_cov,G,G)
+        T3_cov = base.T3_cov(self.psi2s,kst2,Pim)
+        T3_con = np.einsum("ijk,im,jn,ko->mno",T3_cov,G,G,G)
         t1_phi3_cov = base.T1_cov(kst2,phi,Pip)
         t1_phi3_con = np.einsum("i,ij->j",t1_phi3_cov,G)
         t1_12_cov = base.T1_cov(phi,Kp,Km)
-        t1_12_con = np.einsum("i,ij->j",t1_12_cov,G)
-        amp123 = np.einsum("ijkl,j,klmn,m,n->i",p2_123_con,T1_cov,p2_23_cov,t1_phi3_con,t1_12_con)
-
+        amp123 = np.einsum("ijk,jklm,l,mn,n->i",T3_con,p2psi_cov,t1_phi3_con,Gt_ks_con,t1_12_cov)
         return amp123
-
-    def _u_kst2_12_l(self,phi,Kp,Km,Pip,Pim):
+    
+    def _u_FP_l(self,phi,Kp,Km,Pip,Pim):
         G = base.metric()
-
         kst2 = Kp + Km + Pim
-        m14 = Kp + Pim
-        p2_124_cov = base.P2(kst2)
-        p2_124_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2_124_cov,G,G,G,G)
-        T1_cov = base.T1_cov(self.psi2s,kst2,Pip)
-        p2_14_cov = base.P2(m14)
+        p2psi_cov = base.P2(self.psi2s)
+        Gt_ks_cov = base.Gt_cov(kst2)
+        Gt_ks_con = np.einsum("ij,ik,jl->kl",Gt_ks_cov,G,G)
+        T3_cov = base.T3_cov(self.psi2s,kst2,Pip)
+        T3_con = np.einsum("ijk,im,jn,ko->mno",T3_cov,G,G,G)
         t1_phi4_cov = base.T1_cov(kst2,phi,Pim)
         t1_phi4_con = np.einsum("i,ij->j",t1_phi4_cov,G)
         t1_12_cov = base.T1_cov(phi,Kp,Km)
-        t1_12_con = np.einsum("i,ij->j",t1_12_cov,G)
-        amp124 = np.einsum("ijkl,j,klmn,m,n->i",p2_124_con,T1_cov,p2_14_cov,t1_phi4_con,t1_12_con)
-
-        return -1*amp124
-
-    #eq.(73)
-    #<KK_2|32>
-    def _u_kst2_32_r(self,phi,Kp,Km,Pip,Pim):
+        amp124 = np.einsum("ijk,jklm,l,mn,n->i",T3_con,p2psi_cov,t1_phi4_con,Gt_ks_con,t1_12_cov)
+        return amp124
+    
+    #KK_2 FF
+    def _u_FF_r(self,phi,Kp,Km,Pip,Pim):
         G = base.metric()
-
         kst2 = Kp + Km + Pip
-        m23 = Km + Pip
+        p2psi_cov = base.P2(self.psi2s)
+        Gt_ks_cov = base.Gt_cov(kst2)
         T3_cov = base.T3_cov(self.psi2s,kst2,Pim)
         T3_con = np.einsum("ijk,im,jn,ko->mno",T3_cov,G,G,G)
-        p2_123_cov = base.P2(kst2)
-        p2_23_cov = base.P2(m23)
-        p2_23_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2_23_cov,G,G,G,G)
-        t1_phi3_cov = base.T1_cov(kst2,phi,Pip)
+        t3_phi3_cov = base.T3_cov(kst2,phi,Pip)
+        t3_phi3_con = np.einsum("ijk,im,jn,ko->mno",t3_phi3_cov,G,G,G)
         t1_12_cov = base.T1_cov(phi,Kp,Km)
-
-        amp123 = np.einsum("ijk,jklm,lmop,o,p->i",T3_con,p2_123_cov,p2_23_con,t1_phi3_cov,t1_12_cov)
-
+        t1_12_con = np.einsum("i,ij->j",t1_12_cov,G)
+        amp123 = np.einsum("ijk,jklm,lmn,no,o->i",T3_con,p2psi_cov,t3_phi3_con,Gt_ks_cov,t1_12_con)
         return amp123
-
-    def _u_kst2_32_l(self,phi,Kp,Km,Pip,Pim):
+    
+    def _u_FF_l(self,phi,Kp,Km,Pip,Pim):
         G = base.metric()
-
         kst2 = Kp + Km + Pim
-        m14 = Kp + Pim
+        p2psi_cov = base.P2(self.psi2s)
+        Gt_ks_cov = base.Gt_cov(kst2)
         T3_cov = base.T3_cov(self.psi2s,kst2,Pip)
         T3_con = np.einsum("ijk,im,jn,ko->mno",T3_cov,G,G,G)
-        p2_124_cov = base.P2(kst2)
-        p2_14_cov = base.P2(m14)
-        p2_14_con = np.einsum("ijkl,im,jn,ko,lp->mnop",p2_14_cov,G,G,G,G)
-        t1_phi4_cov = base.T1_cov(kst2,phi,Pim)
+        t3_phi4_cov = base.T3_cov(kst2,phi,Pim)
+        t3_phi4_con = np.einsum("ijk,im,jn,ko->mno",t3_phi4_cov,G,G,G)
         t1_12_cov = base.T1_cov(phi,Kp,Km)
-        amp124 = np.einsum("ijk,jklm,lmop,o,p->i",T3_con,p2_124_cov,p2_14_con,t1_phi4_cov,t1_12_cov)
-
-        return -1*amp124
+        t1_12_con = np.einsum("i,ij->j",t1_12_cov,G)
+        amp124 = np.einsum("ijk,jklm,lmn,no,o->i",T3_con,p2psi_cov,t3_phi4_con,Gt_ks_cov,t1_12_con)
+        return amp124
 
 if __name__ == "__main__":
     G = base.metric()

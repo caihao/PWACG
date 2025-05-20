@@ -122,4 +122,17 @@
         temp = dplex.dconstruct(m_*m_ - m_*m_ + np.ones(l),  -m_*w_*np.zeros(l))
         return dplex.ddivide(1.0, temp)
 
+    def BW_rho770(self, m_,w_,Sbc,S_b,S_c):# GS_lineshape
+        m_pi = 0.139556995
+        q_0 = 1/3
+        l = (Sbc.shape)[0]
+        q = (Sbc**2 + S_b**2 + S_c**2 - 2*Sbc*S_b - 2*Sbc*S_c - 2*S_b*S_c)/(4*Sbc)
+        h_s = 2/np.pi * q/Sbc**0.5 * np.log((Sbc**0.5 +2*q)/(2*m_pi))
+        h_m0 = 2/np.pi * q/m_ * np.log((m_ +2*q)/(2*m_pi))
+        dh_ds_m0 = -2/np.pi * q/m_**2 * np.log((m_ +2*q)/(2*m_pi)) + 2/np.pi * q/m_ * (1/(m_ + 2*q))
+        f_s = w_ * m_**2 / q_0**3 * (q*q*(h_s - h_m0) + (Sbc - m_**2)*q_0**2*dh_ds_m0)
+        gamma_s = w_ *m_ / Sbc**0.5 * (q/q_0)
+        tmp = dplex.dconstruct(m_**2 - Sbc + f_s,-m_*gamma_s)
+        return dplex.ddivide(1.0, tmp)
+
 {% endmacro %}
