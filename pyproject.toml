@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pwacg"
+version = "0.1.0"
+description = "Partial Wave Analysis Code Generator"
+authors = [
+    { name = "caihao" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.7"
+dependencies = [
+    "jax",
+    "numpy",
+    "jinja2",
+    "pandas",
+    "iminuit",
+    "pynvml",
+    "matplotlib",
+    "tabulate",
+    "root",
+]
+
+[project.scripts]
+pwacg = "create_all_scripts:main"
+
+[project.urls]
+homepage = "https://github.com/caihao/PWACG"
+
+[tool.setuptools]
+packages = ["dlib", "dmultiprocess", "picture", "pwa", "Tensor", "create_code"]
+include-package-data = true

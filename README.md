@@ -44,7 +44,18 @@ conda install -c conda-forge root
 ```
 
 ### 5. Install Python Dependencies
-Install the remaining Python dependencies:
+
+You have two options to install the Python dependencies:
+
+#### Option 1: Using requirements.txt (Recommended)
+Install all Python dependencies at once using the provided requirements.txt:
+
+```bash
+pip install -r requirements.txt
+```
+
+#### Option 2: Manual Installation
+Alternatively, you can install the dependencies individually:
 
 ```bash
 pip install -U \
@@ -53,8 +64,19 @@ pip install -U \
     pynvml \
     matplotlib \
     pandas \
-    tabulate
+    tabulate \
+    numpy
 ```
+
+### 6. Install as a Package (Optional)
+If you want to install PWACG as a Python package, you can install it in development mode:
+
+```bash
+# Install in development mode
+pip install -e .
+```
+
+This will make the `pwacg` command available in your environment and allow you to import PWACG modules from any directory.
 
 ## Quick Start
 

@@ -1,0 +1,9 @@
+include LICENSE
+include README.md
+recursive-include config *.json
+recursive-include templates *.py
+recursive-include picture *.py
+recursive-include pwa *.py
+recursive-include dlib *.py
+recursive-include dmultiprocess *.py
+recursive-include Tensor *.py
