@@ -122,17 +122,61 @@
         temp = dplex.dconstruct(m_*m_ - m_*m_ + np.ones(l),  -m_*w_*np.zeros(l))
         return dplex.ddivide(1.0, temp)
 
-    def BW_rho770(self, m_,w_,Sbc,S_b,S_c):# GS_lineshape
-        m_pi = 0.139556995
-        q_0 = 1/3
-        l = (Sbc.shape)[0]
-        q = (Sbc**2 + S_b**2 + S_c**2 - 2*Sbc*S_b - 2*Sbc*S_c - 2*S_b*S_c)/(4*Sbc)
-        h_s = 2/np.pi * q/Sbc**0.5 * np.log((Sbc**0.5 +2*q)/(2*m_pi))
-        h_m0 = 2/np.pi * q/m_ * np.log((m_ +2*q)/(2*m_pi))
-        dh_ds_m0 = -2/np.pi * q/m_**2 * np.log((m_ +2*q)/(2*m_pi)) + 2/np.pi * q/m_ * (1/(m_ + 2*q))
-        f_s = w_ * m_**2 / q_0**3 * (q*q*(h_s - h_m0) + (Sbc - m_**2)*q_0**2*dh_ds_m0)
-        gamma_s = w_ *m_ / Sbc**0.5 * (q/q_0)
-        tmp = dplex.dconstruct(m_**2 - Sbc + f_s,-m_*gamma_s)
+    def BW_f0_pipi(self,m_,w_,Sbc):# paramtered width l=0
+        S_b = 0.0194797849
+        S_c = 0.0194797849
+        q2 = 0.25*(Sbc + S_b - S_c)**2/Sbc - S_b
+        q = np.sqrt(q2)
+        q02 = 0.25*(m02 + S_b - S_c)**2/m02 - S_b
+        q0 = np.sqrt(q02)
+        t = q/q0
+
+        gam = w_*t*m_/Sbc # bf = 1
+        tmp = dplex.dconstruct(m_*m_ - Sbc,-m_*gam)
         return dplex.ddivide(1.0, tmp)
+
+    def BW_f2_pipi(self,m_,w_,Sbc):# paramtered width l=2
+        S_b = 0.0194797849
+        S_c = 0.0194797849
+        q2 = 0.25*(Sbc + S_b - S_c)**2/Sbc - S_b
+        q = np.sqrt(q2)
+        q02 = 0.25*(m02 + S_b - S_c)**2/m02 - S_b
+        q0 = np.sqrt(q02)
+        t = (q/q0)**5#not sure who is more accuracy
+        bf = (9+3*q02+q02*q02)/(9+3*q2+q2*q2)
+
+        gam = w_*t*m_/Sbc*bf
+        tmp = dplex.dconstruct(m_*m_ - Sbc,-m_*gam)
+        return dplex.ddivide(1.0, tmp)
+
+    def BW_rho770(self,m_,w_,Sbc):# GS_lineshape
+        S_b = 0.0194797849
+        S_c = 0.0194797849
+        GS1 = 0.636619783 # 2/ma.pi
+        GS2 = 0.01860182466 # 3*mpion2/ma.pi
+        GS3 = 0.1591549458; # 1/(2*ma.pi)
+        GS4 = 0.00620060822; # mass_Pion2/ma.pi
+        m = np.sqrt(Sbc)
+        m02 = m_*m_ # m0 = m_ 是我们要拟合的参数
+        q2 = 0.25*(Sbc + S_b - S_c)**2/Sbc - S_b
+        q = np.sqrt(q2)
+        q02 = 0.25*(m02 + S_b - S_c)**2/m02 - S_b
+        q0 = np.sqrt(q02)
+        q03 = q0*q02
+        t = q/q0
+        #按照zbs的文章和程序其他的部分，R被设置为1
+        bf = (1+q02)/(1+q2)# rho2pipi l=1
+        #log(mass_2Pion) = 1.2760418309
+        h  = GS1*q/m*(np.log(m+2*q)+1.2760418309)
+        h0 = GS1*q0/m_*(np.log(m_+2*q0)+1.2760418309)
+        dh = h0*(0.125/q02-0.5/m_)+GS3/m02
+        d  = GS2/q02*(np.log(m_+2*q0)+1.2760418309)+GS3*m_/q0-GS4*m_/q03
+
+        gam = w_*t*t*t*m_/m*bf 
+        f = w_*m02/q03*(q2*(h-h0)+(m02-Sbc)*q02*dh)
+
+        a = 1.0 + d*w_/m_
+        b = dplex.dconstruct(m_*m_ - Sbc + f, -m_*gam)
+        return dplex.ddivide(a, b)
 
 {% endmacro %}
