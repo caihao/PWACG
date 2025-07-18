@@ -125,6 +125,7 @@
     def BW_f0_pipi(self,m_,w_,Sbc):# paramtered width l=0
         S_b = 0.0194797849
         S_c = 0.0194797849
+        m02 = m_*m_
         q2 = 0.25*(Sbc + S_b - S_c)**2/Sbc - S_b
         q = np.sqrt(q2)
         q02 = 0.25*(m02 + S_b - S_c)**2/m02 - S_b
@@ -138,6 +139,7 @@
     def BW_f2_pipi(self,m_,w_,Sbc):# paramtered width l=2
         S_b = 0.0194797849
         S_c = 0.0194797849
+        m02 = m_*m_ 
         q2 = 0.25*(Sbc + S_b - S_c)**2/Sbc - S_b
         q = np.sqrt(q2)
         q02 = 0.25*(m02 + S_b - S_c)**2/m02 - S_b
