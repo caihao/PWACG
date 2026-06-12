@@ -222,8 +222,8 @@
         tmp = dplex.dconstruct(m_*m_ - Sbc,-m_*gam)
         return dplex.ddivide(1.0, tmp)
     def BW_f0_k0(self,m_,w_,Sbc):# paramtered width l=0 b1 state SS and DS
-        S_b = 1.0392986916 #b1=m_phi+m_pi
-        S_c = 0.24371698
+        S_b = 1.2627 #kst=m_phi+m_K
+        S_c = 0.24372
         m02 = m_*m_
         q2 = np.abs(0.25*(Sbc + S_b - S_c)**2/Sbc - S_b)
         q = np.sqrt(q2)
@@ -234,8 +234,8 @@
         tmp = dplex.dconstruct(m_*m_ - Sbc,-m_*gam)
         return dplex.ddivide(1.0, tmp)
     def BW_f2_k0(self,m_,w_,Sbc):# paramtered width l=0 b1 state SS and DS
-        S_b = 1.0392986916 #b1=m_phi+m_pi
-        S_c = 0.24371698
+        S_b = 1.2627 #kst=m_phi+m_K
+        S_c = 0.24372
         m02 = m_*m_
         q2 = np.abs(0.25*(Sbc + S_b - S_c)**2/Sbc - S_b)
         q = np.sqrt(q2)

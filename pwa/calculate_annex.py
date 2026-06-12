@@ -128,7 +128,7 @@
                 {%- endfor -%}
                 {{func.amp}}):
 
-        {% if func.prop_name == "BW_BWb" %}
+        {% if func.prop_name == "BW_BWb" or func.prop_name == "BW_BWk"%}
 
         {%- if func.Sbc.b1 == 'b124_kk' %}
         bw1 = self.BW_BW_f0_k0({{func["prop"]["prop_phi"]["paras"]|join(',')}},{{func["prop"]["prop_f"]["paras"]|join(',')}})
@@ -181,7 +181,7 @@
         {% endif %}
         return phif
 
-{%- if func.prop_name != "BW_BWb" %}
+{%- if func.prop_name != "BW_BWb" and func.prop_name != "BW_BWk"%}
     def {{func.prop_name}}(self, {{func["prop"]["prop_phi"]["paras"]|join(',')}},{{func["prop"]["prop_f"]["paras"]|join(',')}}):
         {%- if info.merge == 'phi' %}
         a = self.{{func.prop.prop_phi.name}}({{func["prop"]["prop_phi"]["paras"]|join(',')}})
@@ -246,7 +246,7 @@
                 {%- endfor -%}
                 {{func.amp}}):
 
-        {% if func.prop_name == "BW_BWb" %}
+        {% if func.prop_name == "BW_BWb" or func.prop_name == "BW_BWk"%}
 
         {%- if func.Sbc.b1 == 'b124_kk' %}
         bw1 = self.BW_BW_f0_k0({{func["prop"]["prop_phi"]["paras"]|join(',')}},{{func["prop"]["prop_f"]["paras"]|join(',')}})
