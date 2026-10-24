@@ -46,7 +46,7 @@ logger = logging.getLogger("fit")
         result_info = dict()
         for n in range({{info.fit.Cycles}}):
             {% if info.fit.random %}
-            {#
+            {# 原有的random代码
             theta = 2*onp.pi*onp.random.rand(theta_index.shape[0])
             self.args_float[theta_index] = 1e-1*onp.cos(theta)
             self.args_float[const_index] = 1e-1*onp.sin(theta)

@@ -122,7 +122,7 @@ class Control(object):
         for _ in range(self.threads_in_one_gpu):
         {% for lh in lh_coll %}
             self.{{lh.tag}}_data_hvp[device_rank,_,:] = self.pwaf_list[device_rank][_].jit_hvp_data_fwdrev_{{lh.tag}}(args_float, any_vector)[1]
-            self.{{lh.tag}}_mc_hvp_g[device_rank,_,:], self.{{lh.tag}}_mc_hvp[device_rank,_,:] = self.pwaf_list[device_rank][_].jit_hvp_mc_fwdrev_{{lh.tag}}(args_float, any_vector)
+            self.{{lh.tag}}_mc_hvp_v[device_rank,_], self.{{lh.tag}}_mc_hvp_g[device_rank,_,:], self.{{lh.tag}}_mc_hvp[device_rank,_,:] = self.pwaf_list[device_rank][_].jit_hvp_mc_fwdrev_{{lh.tag}}(args_float, any_vector)
         {% endfor %}
 
     def thread_hvp(self, args_float, any_vector):
@@ -135,8 +135,8 @@ class Control(object):
              threading_list[_].start()
         for _ in range(self.thread_gpus):
              threading_list[_].join()
-        self.thread_mc_likelihood(args_float)
         {% for lh in lh_coll %}
+        self.{{lh.tag}}_mc_hvp_value = onp.sum(self.{{lh.tag}}_mc_hvp_v)
         result_{{lh.tag}} = onp.sum(self.{{lh.tag}}_data_hvp, axis=(0,1)) + {{lh.data_size}}*(onp.sum(self.{{lh.tag}}_mc_hvp,axis=(0,1))/self.{{lh.tag}}_mc_hvp_value - onp.einsum("ikm,jln,n->m",self.{{lh.tag}}_mc_hvp_g,self.{{lh.tag}}_mc_hvp_g,any_vector)/(self.{{lh.tag}}_mc_hvp_value**2))
         {% endfor %}
         result = 
@@ -158,17 +158,23 @@ class Control(object):
     def compile_func(self):
         start = time.time()
         vector = onp.ones(self.args_float.shape)
-        compile_likelihood = Thread(target = self.require_compile, args = (self.thread_likelihood, self.args_float))
-        compile_grad = Thread(target = self.require_compile, args = (self.thread_grad_likelihood, self.args_float))
-        compile_hvp = Thread(target = self.require_compile, args = (self.thread_hvp, self.args_float, vector))
+        first_pwaf = self.pwaf_list[0][0]
 
-        compile_hvp.start()
-        compile_likelihood.start()
-        compile_grad.start()
+        # 1. 先在单实例上按依赖顺序（原函数 -> 一阶导 -> 二阶导）完成单次全局编译，避免多线程并发争抢编译锁
+        {% for lh in lh_coll %}
+        first_pwaf.jit_data_likelihood_{{lh.tag}}(self.args_float).block_until_ready()
+        first_pwaf.jit_mc_likelihood_{{lh.tag}}(self.args_float).block_until_ready()
+        first_pwaf.jit_grad_data_likelihood_{{lh.tag}}(self.args_float).block_until_ready()
+        first_pwaf.jit_grad_mc_likelihood_{{lh.tag}}(self.args_float)[1].block_until_ready()
+        first_pwaf.jit_hvp_data_fwdrev_{{lh.tag}}(self.args_float, vector)[1].block_until_ready()
+        first_pwaf.jit_hvp_mc_fwdrev_{{lh.tag}}(self.args_float, vector)[2].block_until_ready()
+        {% endfor %}
 
-        compile_hvp.join()
-        compile_likelihood.join()
-        compile_grad.join()
+        # 2. 顺序校验并预热所有 GPU 切片（此时已直接命中编译缓存）
+        self.require_compile(self.thread_likelihood, self.args_float)
+        self.require_compile(self.thread_grad_likelihood, self.args_float)
+        self.require_compile(self.thread_hvp, self.args_float, vector)
+
         stop = time.time()
         logger.info("compile time: {}".format(stop-start))
 
