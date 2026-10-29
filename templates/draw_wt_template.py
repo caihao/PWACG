@@ -23,7 +23,7 @@ logger = logging.getLogger("draw")
             for i in leftover:
                 _args_result[i] = -100.0 
             args_float = np.array(_args_result[self.float_list])
-            wt = self.jit_weight_{{lh_coll[0].tag}}(args_float)
+            wt = onp.asarray(self.jit_weight_{{lh_coll[0].tag}}(args_float))
             # print(mod_name, wt)
             frac = onp.sum(wt)/self.sum_wt
             print(mod_name, frac)
@@ -35,12 +35,11 @@ logger = logging.getLogger("draw")
         self.args_list = args_list
         self.float_list = float_list
         print("run weight")
-        self.jit_request()
         args_float = np.array(self.args_list[self.float_list])
         if mode == "pass":
-            wt_list = self.jit_weight_{{lh_coll[0].tag}}(args_float)
+            wt_list = [onp.asarray(w) for w in self.jit_weight_{{lh_coll[0].tag}}(args_float)]
         if mode == "truth":
-            wt_list = self.jit_weight_truth_{{lh_coll[0].tag}}(args_float)
+            wt_list = [onp.asarray(w) for w in self.jit_weight_truth_{{lh_coll[0].tag}}(args_float)]
         self.sum_wt = onp.sum(wt_list[0])
         total_weight = dict()
         # print("args_list: \n",args_float)
@@ -54,6 +53,7 @@ logger = logging.getLogger("draw")
             if not "{{func.calculate_func|replace("_l_","_")|replace("_r_","_")}}" in temp_cal_cul_func:
                 loop_index += 1
             wt = wt_list[loop_index][i]
+            # print(wt,i,loop_index)
             total_weight["{{func.calculate_func}}_"+str(i)] = wt
             print("{{func.calculate_func}} frac", onp.sum(wt)/self.sum_wt)
             total_fit_frac += onp.sum(wt)/self.sum_wt
